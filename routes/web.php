@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get("/showItemList", [ItemController::class, "showItemList"])->name("itemcontroller.showItemList");
+
+Route::post("/addItem", [ItemController::class, "addItem"])->name("itemcontroller.addItem");
+
+Route::get("/addItemForm/{id}", [ItemController::class, "addItemForm"])->name("item.addItemForm");
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
