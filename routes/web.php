@@ -24,9 +24,9 @@ Route::get("/showCartList/{userId}", [CartController::class, "showCartList"])->n
 
 Route::get("/showItemList", [ItemController::class, "showItemList"])->name("itemcontroller.showItemList");
 
-Route::post("/addItem", [ItemController::class, "addItem"])->name("itemcontroller.addItem");
+Route::post("/addItem", [CartController::class, "addItem"])->name("cartcontroller.addItem");
 
-Route::get("/addItemForm/{id}", [ItemController::class, "addItemForm"])->name("item.addItemForm");
+Route::get("/addItemForm/{cartId}", [CartController::class, "addItemForm"])->name("cartcontroller.addItemForm");
 
 // Route::get('/', function () {
 //     return view('welcome');

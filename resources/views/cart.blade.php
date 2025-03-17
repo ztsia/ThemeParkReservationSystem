@@ -18,7 +18,7 @@
 .quantity-container {
   display: flex;
   align-items: center;
-  justify-content: center; /* Center content inside the container */
+  justify-content: center;
   gap: 10px;
 }
 
@@ -51,12 +51,15 @@
 <h1>Your Cart</h1>
 
 <div class="container">
+
   <table>
     <tr>
       <th>Item</th>
       <th>Date</th>
       <th>UserCategory</th>
       <th>Quantity</th>
+      <th>Price</th>
+      <th>Subtotal</th>
       <th>Delete</th>
     </tr>
   
@@ -91,8 +94,47 @@
           
         </div>
       </td>
-      <td><a href="{{ route('cartcontroller.deleteCart', $item->id) }}">Delete</a></td>
+      <td>
+        @php
+          // Retrieve the item's price based on user category
+          $itemPrice = $item->item->getPriceByCategory($item['user_category']);
+        @endphp
+        RM{{ number_format($itemPrice, 2) }}
+      </td>
+      <td>
+        @php
+          // Retrieve the item's price based on user category
+          $itemPrice = $item->item->getPriceByCategory($item['user_category']);
+          $subtotal = $itemPrice * $item['quantity'];
+        @endphp
+        RM{{ number_format($subtotal, 2) }}
+      </td>
+      <td>
+        <a href="{{ route('cartcontroller.deleteCart', $item->id) }}">Delete</a>
+      </td>
     </tr>
     @endforeach
   </table>
+
+  {{-- Display total price --}}
+  <div>
+    <h2>Summary</h2>
+    @php
+      $total = 0; // Initialize total
+    @endphp
+  
+    @foreach ($items as $item)
+      @php
+        // Retrieve the item's price based on user category
+        $itemPrice = $item->item->getPriceByCategory($item['user_category']);
+        $subtotal = $itemPrice * $item['quantity'];
+        $total += $subtotal;
+      @endphp 
+    @endforeach
+
+        <p>Subtotal: RM{{ number_format($total, 2) }}</p>
+        <p>Tax (6%): RM{{ number_format($total * 0.06, 2) }}</p>
+        <p>Total Price: RM{{ number_format($total * 1.06, 2) }}</p>
+
+  </div>
 </div>

@@ -21,4 +21,17 @@ class Item extends Model
     {
         return $this->hasMany(Cart::class);
     }
+
+    // get price based on user category
+    public function getPriceByCategory($userCategory)
+    {
+        switch ($userCategory) {
+            case 'childrenSeniorPrice':
+                return $this->childrenSeniorPrice;
+            case 'studentPrice':
+                return $this->studentPrice;
+            default: // normal price
+                return $this->normalPrice;
+        }
+    }
 }

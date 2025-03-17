@@ -4,9 +4,52 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use App\Models\User;
+use App\Models\Item;
 
 class CartController extends Controller
 {
+  public function addItemForm($cartId)
+  {
+    $item = Item::find($cartId);
+    $user = User::find(1); // to be replaced
+    return view("itemDetails", ["item" => $item, "user" => $user]);
+  }
+
+  public function addItem(Request $request)
+  {
+    // dd($request->all());
+
+    // Ensure user_id is set
+    $data = $request->all();
+    $data['user_id'] = $request->userId; // Explicitly set user_id
+    $data['item_id'] = $request->itemId; // Explicitly set item_id
+    $data['ticket_date'] = $request->ticketDate; // Explicitly set item_id
+    $data['user_category'] = $request->userCategory; // 
+    $data['payment_type'] = null;
+    $data['payment_date'] = null;
+
+    // Check if the cart has an existing record with the same user_id, item_id, and payment_status IS NULL
+    $cart = Cart::where('user_id', $data['user_id'])
+      ->where('item_id', $data['itemId'])
+      ->where('ticket_date', $data['ticketDate'])
+      ->where('user_category', $data['userCategory'])
+      ->whereNull('payment_date')
+      ->first();
+
+    if ($cart) {
+      // If cart exists, update quantity
+      $cart->update([
+        'quantity' => $cart->quantity + $data['quantity'], // Increase quantity
+      ]);
+    } else {
+      // If no matching cart record, create a new one
+      Cart::create($data);
+    }
+
+    return redirect()->back()->with('success', 'Item added to cart successfully!');
+  }
+
   // display cart page
   public function showCartList($userId)
   {
@@ -47,4 +90,6 @@ class CartController extends Controller
     $cart->delete();
     return redirect()->back()->with('success', 'Item removed from cart.');
   }
+
+
 }

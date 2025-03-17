@@ -15,7 +15,8 @@
     <td>{{ $item['normalPrice'] }}</td>
     <td>{{ $item['childrenSeniorPrice'] }}</td>
     <td>{{ $item['studentPrice'] }}</td>
-    <td><a href="addItemForm/{{ $item->id }}">Show Details</a></td>
+    <td><a href="{{ route('cartcontroller.addItemForm', $item->id) }}">Show Details</a></td>
+
   </tr>
   @endforeach
 </table>

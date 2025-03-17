@@ -1,9 +1,15 @@
+@if(session('success'))
+  <div>
+    {{ session('success') }}
+  </div>
+@endif
+
 <h1>Item Details for {{ $item['id']}}</h1>
 <a href="{{ route('cartcontroller.showCartList', ['userId' => $user->id]) }}">
   <button>Cart</button>
 </a>
 
-<form action="{{ route('itemcontroller.addItem') }}" method="POST">
+<form action="{{ route('cartcontroller.addItem') }}" method="POST">
   @csrf
 
   <p>{{ $item['id'] }}</p>
@@ -23,22 +29,4 @@
 
   
   
-  {{-- <button onclick="decreaseItemQty()">-</button>
-  <input type="text" id="quantityInput" value="1" readonly>
-  <button onclick="increaseItemQty()">+</button>
-</form>
-
-<script>
-  function increaseItemQty () {
-    let qtyInput = document.getElementById(quantityInput);
-    input.value = parseInt(input.value) + 1;
-  }
-
-  function decreaseItemQty() {
-      let input = document.getElementById("quantityInput");
-      let newValue = parseInt(input.value) - 1;
-      if (newValue >= 1) { // Ensure quantity doesn't go below 1
-          input.value = newValue;
-      }
-  }
-</script> --}}
+  
