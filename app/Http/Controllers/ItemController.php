@@ -12,13 +12,14 @@ class ItemController extends Controller
 {
     public function showItemList()
     {
+        $user = User::find(1); // to be replaced
         $items = Item::paginate(10);
-        return view("itemList", ['items' => $items]);
+        return view("itemList", ['items' => $items, 'user' => $user]);
     }
     public function addItemForm(Request $request)
     {
         $item = Item::find($request->id);
-        $user = User::find(1); // need to add user id
+        $user = User::find(1); // to be replaced
         return view("itemDetails", ["item" => $item, "user" => $user]);
     }
 
@@ -50,23 +51,10 @@ class ItemController extends Controller
             ]);
         } else {
             // If no matching cart record, create a new one
-            // $data = $request->all();
-            // $data['user_id'] = 1;
-            // $data['payment_type'] = null;
-            // $data['payment_date'] = null;
-
-
-            // Cart::create($data);
-
-            Cart::create([
-                'user_id' => $request->userId,
-                'item_id' => $request->itemId,
-                'ticket_date' => $request->ticketDate,
-                'user_category' => $request->userCategory,
-                'quantity' => $request->itemQty,
-                'payment_type' => null,
-                'payment_date' => null,
-            ]);
+            $data = $request->all();
+            $data['payment_type'] = null;
+            $data['payment_date'] = null;
+            Cart::create($data);
         }
 
         return redirect()->back()->with('success', 'Item added to cart successfully!');

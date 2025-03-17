@@ -1,17 +1,13 @@
 <h1>Item Details for {{ $item['id']}}</h1>
-<a href="cart.blade.php"><button>Cart</button></a>
+<a href="{{ route('cartcontroller.showCartList', ['userId' => $user->id]) }}">
+  <button>Cart</button>
+</a>
 
-<div>
-  <p>Home Page Items...</p>
-</div>
 <form action="{{ route('itemcontroller.addItem') }}" method="POST">
   @csrf
 
   <p>{{ $item['id'] }}</p>
   <p>{{ $item['name'] }}</p>
-  <p>{{ $item['normalPrice'] }}</p>
-  <p>{{ $item['childrenSeniorPrice'] }}</p>
-  <p>{{ $item['studentPrice'] }}</p>
 
   <br><br>
   <input type="hidden" name="userId" value="{{ $user['id'] }}">
@@ -21,9 +17,11 @@
   <p>What user category?</p>
   <input type="text" name="userCategory" value="normalPrice">
   <p>How many items u want to add?</p>
-  <input type="text" name="itemQty" value="1">
+  <input type="text" name="quantity" value="1">
   
   <button type="submit">Add to Cart</button>
+
+  
   
   {{-- <button onclick="decreaseItemQty()">-</button>
   <input type="text" id="quantityInput" value="1" readonly>
