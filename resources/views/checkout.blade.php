@@ -61,7 +61,7 @@
     <h2>Payment Method</h2>
     <input type="radio" name="paymentMethod" value="onlineBanking"> Online Banking
     <input type="radio" name="paymentMethod" value="credit/debitCard"> Credit/Debit Card
-    <input type="radio" name="paymentMethod" value="cashOnDelivery"> Cash on Delivery
+    <input type="radio" name="paymentMethod" value="cashPaymentAtPhysicalStores"> Cash Payment at Physical Stores
     <br><span style="color: red">@error('paymentMethod') {{ $message }} @endError</span><br>
     <hr>
 

@@ -1,8 +1,4 @@
 <style>
-  .container {
-    /* text-align: center; */
-  }
-
   table {
     border: 2px solid black;
     border-collapse: collapse;
@@ -13,7 +9,6 @@
   th,
   td {
     border: 1px solid black;
-    /* vertical-align: middle;  */
     text-align: center;
   }
 
@@ -26,7 +21,6 @@
 
   .quantity-container form {
     display: inline-block;
-    /* Ensures the forms stay inline */
   }
 
   .quantity-container button {
@@ -135,16 +129,19 @@
   </div>
   <div>
     <div>
-      <form action="{{ route('cartController.showCheckoutForm', ['userId' => $items->first()->user_id]) }}" method="GET">
+      <form action="{{ route('cartController.showCheckoutForm', ['userId' => auth()->id()]) }}" method="GET">
         <input type="submit" value="Checkout">
       </form>
     </div>
   </div>
 </div>
 
-<br>
 @if(session('success'))
 <div style="color:green">
   {{ session('success') }}
+</div>
+@elseif(session('error'))
+<div style="color:red">
+  {{ session('error') }}
 </div>
 @endif

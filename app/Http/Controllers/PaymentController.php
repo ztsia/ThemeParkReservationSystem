@@ -8,6 +8,20 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
+    public function cash($userId)
+    {
+        $unpaidCartItems = CartController::getUnpaidCartItems($userId);
+
+        // update payment type and date
+        foreach ($unpaidCartItems as $item) {
+            $item->payment_type = 'Cash Payment at Physical Stores';
+            $item->payment_date = now();
+            $item->save();
+        }
+
+        return redirect()->route('itemController.showItemList')->with('success', 'Payment successful!');
+    }
+
     public function onlineBanking(Request $request)
     {
         $request->validate([
@@ -18,12 +32,10 @@ class PaymentController extends Controller
         ]);
 
         $unpaidCartItems = CartController::getUnpaidCartItems($request->userId);
-        dd($request->userId);
 
-        dd($unpaidCartItems);
-
+        // update payment type and date
         foreach ($unpaidCartItems as $item) {
-            $item->payment_status = 'PAID';
+            $item->payment_type = 'Online Banking';
             $item->payment_date = now();
             $item->save();
         }
@@ -44,26 +56,18 @@ class PaymentController extends Controller
             'expiryDate' => 'required',
             'cvv' => 'required | digits:3',
         ]);
-        dd([
-            'request data' => $request->all(),
-            'user id' => $request->userId,
-            'cart items' => CartController::getUnpaidCartItems($request->userId),
-        ]);
 
 
         $unpaidCartItems = CartController::getUnpaidCartItems($request->userId);
-        dd($unpaidCartItems);
 
+        // update payment type and date
+        foreach ($unpaidCartItems as $item) {
+            $item->payment_type = 'Credit/Debit Card';
+            $item->payment_date = now();
+            $item->save();
+        }
 
-        // foreach ($unpaidCartItems as $item) {
-        //     $item->payment_type = $request->paymentType;
-        //     $item->payment_date = now();
-        //     $item->save();
-        // }
-
-
-
-        // return redirect()->route('itemController.showItemList')->with('success', 'Payment successful!');
+        return redirect()->route('itemController.showItemList')->with('success', 'Payment successful!');
     }
 
     public function showCreditCardForm()

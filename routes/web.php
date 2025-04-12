@@ -33,8 +33,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post("/checkout", [CartController::class, "checkout"])->name("cartController.checkout");
     Route::get("/onlineBanking", [PaymentController::class, "showOnlineBankingForm"])->name("paymentController.showOnlineBankingForm");
     Route::post("/onlineBanking", [PaymentController::class, "onlineBanking"])->name("paymentController.onlineBanking");
-    Route::get("/showCreditCardForm", [PaymentController::class, "showCreditCardForm"])->name("paymentController.showCreditCardForm");
+    Route::get("/creditCard", [PaymentController::class, "showCreditCardForm"])->name("paymentController.showCreditCardForm");
     Route::post("/creditCard", [PaymentController::class, "creditCard"])->name("paymentController.creditCard");
+    Route::get("/cash/{userId}", [PaymentController::class, "cash"])->name("paymentController.cash");
 });
 
 Route::get('/', function () {

@@ -1,7 +1,6 @@
-<h1>Item Details for {{ $item['id']}}</h1>
-<a href="{{ route('cartController.showCartList', ['userId' => $user->id]) }}">
-  <button>Cart</button>
-</a>
+<x-header />
+
+<h1>Item Details for {{ $item['id'] }}</h1>
 
 <form action="{{ route('cartController.addItem') }}" method="POST">
   @csrf
@@ -10,7 +9,10 @@
   <p>{{ $item['name'] }}</p>
 
   <br><br>
-  <input type="hidden" name="userId" value="{{ $user['id'] }}">
+  <!-- if authenticated, pass back user id info -->
+  @auth
+  <input type="hidden" name="userId" value="{{ auth()->user()->id }}">
+  @endauth
   <input type="hidden" name="itemId" value="{{ $item['id'] }}">
   <p>What is the date of the ticket?</p>
   <input type="date" name="ticketDate" value="{{ date('Y-m-d') }}">
