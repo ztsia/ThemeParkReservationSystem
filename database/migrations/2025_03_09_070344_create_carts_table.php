@@ -24,11 +24,6 @@ class CreateCartsTable extends Migration
             $table->date('payment_date')->nullable();
             $table->timestamps();
         });
-
-        // Schema::table('carts', function (Blueprint $table) {
-        //     $table->string('payment_type')->nullable()->change(); // Allow NULL values
-        //     $table->date('payment_date')->nullable()->change(); // Allow NULL values
-        // });
     }
 
     /**

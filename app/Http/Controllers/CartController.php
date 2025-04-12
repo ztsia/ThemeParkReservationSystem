@@ -9,6 +9,37 @@ use App\Models\Item;
 
 class CartController extends Controller
 {
+  public function checkout(Request $request)
+  {
+    $request->validate([
+      'addressLine1' => 'required | max: 255 | string',
+      'addressLine2' => 'required | max: 255 | string',
+      'postalCode' => 'required | digits:5',
+      'city' => 'required | max: 255 | string',
+      'country' => 'required | max: 255 | string',
+      'paymentMethod' => 'required | in:onlineBanking,credit/debitCard,e-wallet,cashOnDelivery',
+    ]);
+
+    switch ($request->paymentMethod) {
+      case "onlineBanking": // typo here, fix spelling
+        return redirect()->route('paymentController.showOnlineBankingForm');
+        break;
+      case "credit/debitCard":
+        return redirect()->route('paymentController.showCreditCardForm');
+        break;
+      default:
+        // default view
+        return;
+    }
+  }
+
+  public function showCheckoutForm($userId)
+  {
+    $user = User::find($userId);
+    $data = $this->getUnpaidCartItems($userId); // find unpaid cart items
+    return view("checkout", ["items" => $data, "user" => $user]);
+  }
+
   public function addItemForm($cartId)
   {
     $item = Item::find($cartId);
@@ -90,6 +121,4 @@ class CartController extends Controller
     $cart->delete();
     return redirect()->back()->with('success', 'Item removed from cart.');
   }
-
-
 }

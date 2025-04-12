@@ -1,15 +1,15 @@
 @if(session('success'))
-  <div>
-    {{ session('success') }}
-  </div>
+<div style="color:green">
+  {{ session('success') }}
+</div>
 @endif
 
 <h1>Item Details for {{ $item['id']}}</h1>
-<a href="{{ route('cartcontroller.showCartList', ['userId' => $user->id]) }}">
+<a href="{{ route('cartController.showCartList', ['userId' => $user->id]) }}">
   <button>Cart</button>
 </a>
 
-<form action="{{ route('cartcontroller.addItem') }}" method="POST">
+<form action="{{ route('cartController.addItem') }}" method="POST">
   @csrf
 
   <p>{{ $item['id'] }}</p>
@@ -24,9 +24,5 @@
   <input type="text" name="userCategory" value="normalPrice">
   <p>How many items u want to add?</p>
   <input type="text" name="quantity" value="1">
-  
-  <button type="submit">Add to Cart</button>
 
-  
-  
-  
+  <button type="submit">Add to Cart</button>
