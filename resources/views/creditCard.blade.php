@@ -1,6 +1,7 @@
 <h1>Credit Card Payment</h1>
 <form action="{{ route('paymentController.creditCard') }}" method="POST">
     @csrf
+    <input type="hidden" name="userId" value="{{ auth()->user()->id }}">
     Cardholder Name:
     <input type="text" placeholder="Cardholder Name" name="cardholderName"><br>
     <span style="color: red">@error('cardholderName') {{ $message }} @endError</span><br>

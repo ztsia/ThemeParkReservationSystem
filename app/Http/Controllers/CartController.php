@@ -89,7 +89,7 @@ class CartController extends Controller
   }
 
   // get unpaid cart items with item details
-  public function getUnpaidCartItems($userId)
+  public static function getUnpaidCartItems($userId)
   {
     $unpaidCartItems = Cart::where('user_id', $userId)
       ->whereNull('payment_date')

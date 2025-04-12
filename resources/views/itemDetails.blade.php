@@ -1,9 +1,3 @@
-@if(session('success'))
-<div style="color:green">
-  {{ session('success') }}
-</div>
-@endif
-
 <h1>Item Details for {{ $item['id']}}</h1>
 <a href="{{ route('cartController.showCartList', ['userId' => $user->id]) }}">
   <button>Cart</button>
@@ -26,3 +20,10 @@
   <input type="text" name="quantity" value="1">
 
   <button type="submit">Add to Cart</button>
+
+  <br><br>
+  @if(session('success'))
+  <div style="color:green">
+    {{ session('success') }}
+  </div>
+  @endif

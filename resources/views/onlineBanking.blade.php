@@ -3,6 +3,8 @@
 
     <form action="{{ route('paymentController.onlineBanking') }}" method="POST">
         @csrf
+        <input type="hidden" name="userId" value="{{ auth()->user()->id }}">
+        <input type="hidden" name="paymentType" value="Online Banking">
         Select Bank:
         <select name="bank">
             <option value="" disabled selected hidden>-- Choose Your Bank --</option>

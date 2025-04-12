@@ -46,16 +46,9 @@
   }
 </style>
 
-@if(session('success'))
-<div style="color:green">
-  {{ session('success') }}
-</div>
-@endif
-
 <h1>Your Cart</h1>
 
 <div class="container">
-
   <table>
     <tr>
       <th>Item</th>
@@ -148,3 +141,10 @@
     </div>
   </div>
 </div>
+
+<br>
+@if(session('success'))
+<div style="color:green">
+  {{ session('success') }}
+</div>
+@endif

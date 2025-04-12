@@ -1,9 +1,4 @@
 <h1>Item List</h1>
-@if(session('success'))
-<div style="color:green">
-  {{ session('success') }}
-</div>
-@endif
 <table>
   <tr>
     <th>id</th>
@@ -25,3 +20,10 @@
   </tr>
   @endforeach
 </table>
+
+<br>
+@if(session('success'))
+<div style="color:green">
+  {{ session('success') }}
+</div>
+@endif

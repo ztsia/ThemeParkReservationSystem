@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\CartController;
+
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -14,6 +16,17 @@ class PaymentController extends Controller
             'password' => 'required | string',
             'amount' => 'required | numeric | min:1 | max:5000',
         ]);
+
+        $unpaidCartItems = CartController::getUnpaidCartItems($request->userId);
+        dd($request->userId);
+
+        dd($unpaidCartItems);
+
+        foreach ($unpaidCartItems as $item) {
+            $item->payment_status = 'PAID';
+            $item->payment_date = now();
+            $item->save();
+        }
 
         return redirect()->route('itemController.showItemList')->with('success', 'Payment successful!');
     }
@@ -31,8 +44,26 @@ class PaymentController extends Controller
             'expiryDate' => 'required',
             'cvv' => 'required | digits:3',
         ]);
+        dd([
+            'request data' => $request->all(),
+            'user id' => $request->userId,
+            'cart items' => CartController::getUnpaidCartItems($request->userId),
+        ]);
 
-        return redirect()->route('itemController.showItemList')->with('success', 'Payment successful!');
+
+        $unpaidCartItems = CartController::getUnpaidCartItems($request->userId);
+        dd($unpaidCartItems);
+
+
+        // foreach ($unpaidCartItems as $item) {
+        //     $item->payment_type = $request->paymentType;
+        //     $item->payment_date = now();
+        //     $item->save();
+        // }
+
+
+
+        // return redirect()->route('itemController.showItemList')->with('success', 'Payment successful!');
     }
 
     public function showCreditCardForm()
