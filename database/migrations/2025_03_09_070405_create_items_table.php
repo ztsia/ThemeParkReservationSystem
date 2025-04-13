@@ -17,10 +17,10 @@ class CreateItemsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->string('picture');
-            $table->integer('normalPrice');
-            $table->integer('childrenSeniorPrice');
-            $table->integer('studentPrice');
+            $table->string('picture');  // image path
+            $table->decimal('normalPrice', 10, 2);
+            $table->decimal('childrenSeniorPrice', 10, 2);
+            $table->decimal('studentPrice', 10, 2);
             $table->timestamps();
         });
     }

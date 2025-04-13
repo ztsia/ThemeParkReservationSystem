@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +18,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes();
+
+//Home
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+
+
+/*
+| Admin Routes
+|---------------
+*/
+//Items
+Route::get('/itemForm', [ItemController::class, 'createForm'])->name('itemForm.createForm');
+Route::get('/itemForm/{item}', [ItemController::class, 'editForm'])->name('itemForm.editForm');
+Route::post('/itemForm', [ItemController::class, 'createItem'])->name('itemForm.createItem');
+Route::patch('/itemForm/{item}', [ItemController::class, 'editItem'])->name('itemForm.editItem');
