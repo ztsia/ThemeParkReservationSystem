@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,10 @@ use App\Http\Controllers\ItemController;
 
 Auth::routes();
 
-//Home
+/*
+| Home Routes
+|---------------
+*/
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
@@ -36,3 +40,9 @@ Route::get('/itemForm', [ItemController::class, 'createForm'])->name('itemForm.c
 Route::get('/itemForm/{item}', [ItemController::class, 'editForm'])->name('itemForm.editForm');
 Route::post('/itemForm', [ItemController::class, 'createItem'])->name('itemForm.createItem');
 Route::patch('/itemForm/{item}', [ItemController::class, 'editItem'])->name('itemForm.editItem');
+
+//Events
+Route::get('/eventForm', [EventController::class, 'createForm'])->name('eventForm.createForm');
+Route::get('/eventForm/{event}', [EventController::class, 'editForm'])->name('eventForm.editForm');
+Route::post('/eventForm', [EventController::class, 'createEvent'])->name('eventForm.createEvent');
+Route::patch('/eventForm/{event}', [EventController::class, 'editEvent'])->name('eventForm.editEvent');

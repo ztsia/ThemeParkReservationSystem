@@ -31,10 +31,10 @@ class ItemController extends Controller
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images/items', 'public');
-            $data['picture'] = $imagePath; 
+            $data['image'] = $imagePath; 
         }
         else {
-            $data['picture'] = 'images/default.jpg'; // Set default image
+            $data['image'] = 'images/default.jpg'; // Set default image
         }
 
         Item::create($data);
@@ -55,12 +55,12 @@ class ItemController extends Controller
 
         if ($request->hasFile('image')) {
             // Delete the old image if it exists
-            if ($item->picture) {
-                Storage::disk('public')->delete($item->picture);
+            if ($item->image) {
+                Storage::disk('public')->delete($item->image);
             }
             // Store the new image
             $imagePath = $request->file('image')->store('images/items', 'public');
-            $data['picture'] = $imagePath; 
+            $data['image'] = $imagePath; 
         }
 
         $item->update($data);

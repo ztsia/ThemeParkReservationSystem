@@ -31,8 +31,8 @@
     <div class="mb-3">
         <label for="image" class="form-label">Image</label>
         <input type="file" class="form-control" id="image" name="image" accept="image/*">
-        @if (isset($item) && $item->picture)
-            <img src="{{ asset('storage/' . $item->picture) }}" alt="{{ $item->name }}" class="img-thumbnail mt-2" width="100">
+        @if (isset($item) && $item->image)
+            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" class="img-thumbnail mt-2" width="100">
         @endif
         @error('image')
         <div class="alert alert-danger">{{ $message }}</div>
