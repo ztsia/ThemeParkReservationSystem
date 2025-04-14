@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<form method="POST" action="{{ isset($item) ? route('itemForm.editItem', $item) : route('itemForm.createItem') }}" enctype="multipart/form-data">
+<form method="POST" action="{{ isset($item) ? route('item.edit', $item) : route('item.create') }}" enctype="multipart/form-data">
     @csrf
 
     @if (isset($item))

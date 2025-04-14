@@ -36,13 +36,13 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 |---------------
 */
 //Items
-Route::get('/itemForm', [ItemController::class, 'createForm'])->name('itemForm.createForm');
-Route::get('/itemForm/{item}', [ItemController::class, 'editForm'])->name('itemForm.editForm');
-Route::post('/itemForm', [ItemController::class, 'createItem'])->name('itemForm.createItem');
-Route::patch('/itemForm/{item}', [ItemController::class, 'editItem'])->name('itemForm.editItem');
+Route::get('/itemForm', [ItemController::class, 'createForm'])->name('item.createForm');
+Route::get('/itemForm/{item}', [ItemController::class, 'editForm'])->name('item.editForm');
+Route::post('/itemForm', [ItemController::class, 'createItem'])->name('item.create');
+Route::patch('/itemForm/{item}', [ItemController::class, 'editItem'])->name('item.edit');
 
 //Events
-Route::get('/eventForm', [EventController::class, 'createForm'])->name('eventForm.createForm');
-Route::get('/eventForm/{event}', [EventController::class, 'editForm'])->name('eventForm.editForm');
-Route::post('/eventForm', [EventController::class, 'createEvent'])->name('eventForm.createEvent');
-Route::patch('/eventForm/{event}', [EventController::class, 'editEvent'])->name('eventForm.editEvent');
+Route::get('/eventForm', [EventController::class, 'createForm'])->name('event.createForm');
+Route::get('/eventForm/{event}', [EventController::class, 'editForm'])->name('event.editForm');
+Route::post('/eventForm', [EventController::class, 'createEvent'])->name('event.create');
+Route::patch('/eventForm/{event}', [EventController::class, 'editEvent'])->name('event.edit');
