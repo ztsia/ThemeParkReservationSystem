@@ -8,17 +8,26 @@ use App\Models\Event;
 
 class EventController extends Controller
 {
-    public function createForm()
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
         return view('admin.eventForm', ['event' => null]);
     }
 
-    public function editForm(Event $event)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Event $event)
     {
         return view('admin.eventForm', ['event' => $event]);
     }
 
-    public function createEvent(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
@@ -40,7 +49,10 @@ class EventController extends Controller
         return redirect()->route('home')->with('status', 'Event created successfully.');
     }
 
-    public function editEvent(Request $request, Event $event)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Event $event)
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
@@ -61,6 +73,6 @@ class EventController extends Controller
 
         $event->update($data);
 
-        return redirect()->route('home')->with('status', 'Event edited successfully.');
+        return redirect()->route('home')->with('status', 'Event updated successfully.');
     }
 }

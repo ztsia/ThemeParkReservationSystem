@@ -22,6 +22,16 @@ use App\Http\Controllers\EventController;
 Auth::routes();
 
 /*
+| Authentication Routes (Login, Register, Password Reset)
+|---------------
+*/
+
+
+
+
+
+
+/*
 | Home Routes
 |---------------
 */
@@ -35,14 +45,16 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 | Admin Routes
 |---------------
 */
-//Items
-Route::get('/itemForm', [ItemController::class, 'createForm'])->name('item.createForm');
-Route::get('/itemForm/{item}', [ItemController::class, 'editForm'])->name('item.editForm');
-Route::post('/itemForm', [ItemController::class, 'createItem'])->name('item.create');
-Route::patch('/itemForm/{item}', [ItemController::class, 'editItem'])->name('item.edit');
+Route::group(['middleware' => ['auth', 'adminAccess']], function () {
+    //Items
+    Route::get('/itemForm', [ItemController::class, 'create'])->name('item.createForm');
+    Route::get('/itemForm/{item}', [ItemController::class, 'edit'])->name('item.editForm');
+    Route::post('/itemForm', [ItemController::class, 'store'])->name('item.create');
+    Route::patch('/itemForm/{item}', [ItemController::class, 'update'])->name('item.edit');
 
-//Events
-Route::get('/eventForm', [EventController::class, 'createForm'])->name('event.createForm');
-Route::get('/eventForm/{event}', [EventController::class, 'editForm'])->name('event.editForm');
-Route::post('/eventForm', [EventController::class, 'createEvent'])->name('event.create');
-Route::patch('/eventForm/{event}', [EventController::class, 'editEvent'])->name('event.edit');
+    //Events
+    Route::get('/eventForm', [EventController::class, 'create'])->name('event.createForm');
+    Route::get('/eventForm/{event}', [EventController::class, 'edit'])->name('event.editForm');
+    Route::post('/eventForm', [EventController::class, 'store'])->name('event.create');
+    Route::patch('/eventForm/{event}', [EventController::class, 'update'])->name('event.edit');
+});

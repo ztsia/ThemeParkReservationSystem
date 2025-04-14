@@ -8,17 +8,26 @@ use App\Models\Item;
 
 class ItemController extends Controller
 {
-    public function createForm()
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
         return view('admin.itemForm', ['item' => null]);
     }
 
-    public function editForm(Item $item)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Item $item)
     {
         return view('admin.itemForm', ['item' => $item]);
     }
 
-    public function createItem(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
@@ -42,7 +51,10 @@ class ItemController extends Controller
         return redirect()->route('home')->with('status', 'Item created successfully.');
     }
 
-    public function editItem(Request $request, Item $item)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Item $item)
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
@@ -65,6 +77,6 @@ class ItemController extends Controller
 
         $item->update($data);
 
-        return redirect()->route('home')->with('status', 'Item edited successfully.');
+        return redirect()->route('home')->with('status', 'Item updated successfully.');
     }
 }
