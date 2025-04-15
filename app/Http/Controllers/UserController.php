@@ -11,5 +11,5 @@ class UserController extends Controller
   public function getCartItems($userId)
   {
     return User::find($userId)->carts;
-  }
+  }   
 }

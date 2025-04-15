@@ -16,13 +16,12 @@ class ItemFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'description' => $this->faker->text(40),
-            'picture' => 'example.jpg',
-            'normalPrice' => $this->faker->numberBetween(10, 99), // Random number between 10-99
-            'childrenSeniorPrice' => $this->faker->numberBetween(10, 99),
-            'studentPrice' => $this->faker->numberBetween(10, 99),
+            'name' => $this->faker->sentence(3),
+            'description' => $this->faker->paragraph(2),
+            'image' => 'images/default.jpg', // Default image path
+            'normalPrice' => $this->faker->randomFloat(2, 1, 100), // Random price between 1 and 100
+            'childrenSeniorPrice' => $this->faker->randomFloat(2, 1, 100), // Random price between 1 and 100
+            'studentPrice' => $this->faker->randomFloat(2, 1, 100), // Random price between 1 and 100
         ];
     }
 }
-

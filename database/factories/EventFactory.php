@@ -14,7 +14,10 @@ class EventFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->sentence(3),
+            'description' => $this->faker->paragraph(2),
+            'image' => 'images/default.jpg', // Default image path
+            'date' => $this->faker->dateTimeBetween('now', '+1 year'),
         ];
     }
 }
