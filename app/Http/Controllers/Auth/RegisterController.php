@@ -74,12 +74,19 @@ class RegisterController extends Controller
         return view('auth.register', ['url' => 'admin']);
     }
 
+    public function showUserRegisterForm()
+    {
+        return view('auth.register'); // you can pass 'url' if you use conditional logic in the blade
+    }
+
     protected function create(array $data)
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'is_admin' =>0,
+
         ]);
     }
     /**
@@ -97,6 +104,7 @@ class RegisterController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'is_admin' =>1,
         ]);
 
         // Redirect after successful registration

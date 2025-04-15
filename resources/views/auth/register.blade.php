@@ -8,7 +8,12 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    @php
+                        $registerRoute = isset($url) && $url === 'admin' ? route('register.admin.submit') : route('register.user');
+                    @endphp
+
+                <form method="POST" action="{{ $registerRoute }}" aria-label="{{ isset($url) && $url === 'admin' ? __('Admin Register') : __('User Register') }}">
+
                         @csrf
 
                         <div class="row mb-3">
@@ -65,9 +70,12 @@
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
+
                                 </button>
                             </div>
                         </div>
+                        <a class="btn btn-link" href="{{ route('register.admin') }}">Register as Admin</a>
+
                     </form>
                 </div>
             </div>

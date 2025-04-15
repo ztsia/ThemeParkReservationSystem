@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -40,16 +40,35 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
         $this->middleware('guest:admin')->except('logout');
     }
-    public function showAdminLoginForm()
-    {
+
+    public function showUserLoginForm()
+{
+    return view('auth.login'); // you can pass 'url' if you use conditional logic in the blade
+}
+
+public function showAdminLoginForm()
+{
     return view('auth.login', ['url' => 'admin']);
+}
+
+
+    public function userLogin(Request $request)
+    {
+    // validate and authenticate user
+    // use the 'web' guard
+    if (Auth::attempt($request->only('email', 'password'))) {
+        return redirect()->intended('/dashboard'); // or wherever
+    }
+    return back()->withErrors(['email' => 'Invalid credentials']);
     }
 
     public function adminLogin(Request $request)
     {
-        $this->validate($request, [
-        'email' => 'required|email',
-        'password' => 'required|min:6'
-    ]);
+    // validate and authenticate admin
+    // optionally use 'admin' guard if set up
+    if (Auth::attempt($request->only('email', 'password'))) {
+        return redirect()->intended('/admin/dashboard');
+    }
+    return back()->withErrors(['email' => 'Invalid credentials']);
     }
 }
