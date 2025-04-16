@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,3 +89,24 @@ Route::group(['middleware' => ['auth', 'adminAccess']], function () {
 
 Route::get('logout', [LoginController::class, 'logout']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+/*
+| For login in different role [admin/user]
+|---------------
+*/
+// Show login forms
+Route::get('/login', [LoginController::class, 'showUserLoginForm'])->name('login');
+Route::get('/login/admin', [LoginController::class, 'showAdminLoginForm'])->name('login.admin');
+
+// Handle login POST
+Route::post('/login', [LoginController::class, 'userLogin'])->name('user.login.submit');
+Route::post('/login/admin', [LoginController::class, 'adminLogin'])->name('admin.login.submit');
+
+// Show register forms
+Route::get('register', [RegisterController::class, 'showUserRegisterForm'])->name('register');
+Route::get('register/admin', [RegisterController::class, 'showAdminRegisterForm'])->name('register.admin');
+
+// Handle register POST
+Route::post('register', [RegisterController::class, 'registerUser'])->name('register.user');
+Route::post('register/admin', [RegisterController::class, 'registerAdmin'])->name('admin.register.submit');
+

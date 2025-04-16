@@ -8,7 +8,12 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    @php
+                    $registerRoute = isset($url) && $url === 'admin' ? route('admin.register.submit') : route('register.user');
+                    @endphp
+
+                    <form method="POST" action="{{ isset($url) && $url === 'admin' ? route('admin.register.submit') : route('register.user') }}">
+
                         @csrf
 
                         <div class="row mb-3">
@@ -65,9 +70,14 @@
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
+
                                 </button>
+                                 <!-- Optional: hidden input or checkbox if this is for admin -->
+    
                             </div>
                         </div>
+                        <a href="{{ route('register.admin') }}">Register as Admin</a>
+
                     </form>
                 </div>
             </div>

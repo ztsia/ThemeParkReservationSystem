@@ -11,6 +11,10 @@ class CreateUsersTable extends Migration
      *
      * @return void
      */
+    protected $fillable = [
+        'name', 'email', 'password', 'is_admin',
+    ];
+    
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
@@ -21,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->boolean('is_admin')->default(false);
+            $table->boolean('is_admin')->default(0);
         });
     }
 
