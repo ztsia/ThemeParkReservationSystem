@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+    HyperHeaven - {{ isset($url) ? 'Edit' : 'Create' }} Item
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

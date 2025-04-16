@@ -52,7 +52,7 @@ class CartController extends Controller
   public function showCartList($userId)
   {
     $data = $this->getUnpaidCartItems($userId); // find unpaid cart items
-    return view("cart", ["items" => $data]);
+    return view("cart.cart", ["items" => $data]);
   }
 
   // update cart item quantity
@@ -114,7 +114,7 @@ class CartController extends Controller
     if ($data->isEmpty()) {
       return redirect()->back()->with('error', 'Your cart is empty. Add items before checkout.');
     }
-    return view("checkout", ["items" => $data, "user" => $user]);
+    return view("cart.checkout", ["items" => $data, "user" => $user]);
   }
 
   // get unpaid cart items with item details

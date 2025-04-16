@@ -45,7 +45,7 @@ class PaymentController extends Controller
 
     public function showOnlineBankingForm()
     {
-        return view('onlineBanking');
+        return view('cart.onlineBanking');
     }
 
     public function creditCard(Request $request)
@@ -72,6 +72,6 @@ class PaymentController extends Controller
 
     public function showCreditCardForm()
     {
-        return view('creditCard');
+        return view('cart.creditCard');
     }
 }
