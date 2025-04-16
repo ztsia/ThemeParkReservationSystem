@@ -7,16 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\User;
-use App\Models\Item;
 
 class CartController extends Controller
 {
-  public function addItemForm($cartId)
-  {
-    $item = Item::find($cartId);
-    return view("itemDetails", ["item" => $item]);
-  }
-
   public function addItem(Request $request)
   {
     $data = $request->all();

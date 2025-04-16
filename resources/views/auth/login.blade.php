@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    HyperHeaven - {{ isset($url) ? 'Edit' : 'Create' }} Item
+    HyperHeaven - {{ ($isAdmin) ? 'Admin' : 'User' }} Login
 @endsection
 
 @section('content')
@@ -9,10 +9,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ isset($url) && $url === 'admin' ? __('Admin Login') : __('User Login') }}</div>
+                <div class="card-header">{{ ($isAdmin) ? __('Admin') : __('User') }} Login</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ isset($url) && $url === 'admin' ? route('admin.login.submit') : route('user.login.submit') }}">
+                    <form method="POST" action="{{ ($isAdmin) ? route('admin.login.submit') : route('user.login.submit') }}">
                         @csrf
 
                         <div class="row mb-3">
@@ -76,7 +76,7 @@
 
                     <hr>
                     <div class="text-center">
-                        @if (isset($url) && $url === 'admin')
+                        @if ($isAdmin)
                             <a class="btn btn-link" href="{{ route('login') }}">Login as User</a>
                         @else
                             <a class="btn btn-link" href="{{ route('login.admin') }}">Login as Admin</a>

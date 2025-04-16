@@ -36,7 +36,7 @@ class RegisterController extends Controller
      */
     public function showAdminRegisterForm()
     {
-        return view('auth.register', ['url' => 'admin']);
+        return view('auth.register', ['isAdmin' => true]);
     }
 
     /**
@@ -44,7 +44,7 @@ class RegisterController extends Controller
      */
     public function showUserRegisterForm()
     {
-        return view('auth.register'); // you can pass 'url' if you use conditional logic in the blade
+        return view('auth.register', ['isAdmin' => false]); 
     }
 
     /**

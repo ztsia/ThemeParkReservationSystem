@@ -1,19 +1,18 @@
 @extends('layouts.app')
 
+@section('title')
+    HyperHeaven - {{ ($isAdmin) ? 'Admin' : 'User' }} Registration
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ ($isAdmin) ? __('Admin') : __('User') }} {{ __('Register') }}</div>
 
                 <div class="card-body">
-                    @php
-                    $registerRoute = isset($url) && $url === 'admin' ? route('admin.register.submit') : route('register.user');
-                    @endphp
-
-                    <form method="POST" action="{{ isset($url) && $url === 'admin' ? route('admin.register.submit') : route('register.user') }}">
-
+                    <form method="POST" action="{{ ($isAdmin) ? route('admin.register.submit') : route('register.user') }}">
                         @csrf
 
                         <div class="row mb-3">
@@ -70,15 +69,19 @@
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
-
                                 </button>
-                                 <!-- Optional: hidden input or checkbox if this is for admin -->
-    
                             </div>
                         </div>
-                        <a href="{{ route('register.admin') }}">Register as Admin</a>
-
                     </form>
+
+                    <hr>
+                    <div class="text-center">
+                        @if ($isAdmin)
+                            <a class="btn btn-link" href="{{ route('register') }}">Register as User</a>
+                        @else
+                            <a class="btn btn-link" href="{{ route('register.admin') }}">Register as Admin</a>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

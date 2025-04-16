@@ -42,48 +42,48 @@ class LoginController extends Controller
     }
 
     public function showUserLoginForm()
-{
-    return view('auth.login'); // you can pass 'url' if you use conditional logic in the blade
-}
-
-public function showAdminLoginForm()
-{
-    return view('auth.login', ['url' => 'admin']);
-}
-
-
-public function userLogin(Request $request)
-{
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-    ]);
-
-    $credentials = $request->only('email', 'password');
-    $credentials['is_admin'] = 0; // user only
-
-    if (Auth::attempt($credentials)) {
-        return redirect()->intended('/dashboard'); // your user dashboard
+    {
+        return view('auth.login', ['isAdmin' => false]); 
     }
 
-    return back()->withErrors(['email' => 'Invalid credentials or not a user.']);
-}
-
-
-public function adminLogin(Request $request)
-{
-    $request->validate([
-        'email' => 'required|email',
-        'password' => 'required',
-    ]);
-
-    $credentials = $request->only('email', 'password');
-    $credentials['is_admin'] = 1; // admin only
-
-    if (Auth::attempt($credentials)) {
-        return redirect()->intended('/admin/dashboard'); // your admin dashboard
+    public function showAdminLoginForm()
+    {
+        return view('auth.login', ['isAdmin' => true]);
     }
 
-    return back()->withErrors(['email' => 'Invalid credentials or not an admin.']);
-}
+
+    public function userLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        $credentials['is_admin'] = 0; // user only
+
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('/dashboard'); 
+        }
+
+        return back()->withErrors(['email' => 'Invalid credentials or not a user.']);
+    }
+
+
+    public function adminLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        $credentials['is_admin'] = 1; // admin only
+
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('/admin/dashboard'); // your admin dashboard
+        }
+
+        return back()->withErrors(['email' => 'Invalid credentials or not an admin.']);
+    }
 }

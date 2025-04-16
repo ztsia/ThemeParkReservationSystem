@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Item;
+use App\Models\Cart;
 
 class HomeController extends Controller
 {
@@ -24,5 +26,20 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
-    }   
+    }
+
+    /**
+     * Display all items.
+     */
+    public function showItemList()
+    {
+        $items = Item::paginate(10);
+        return view("itemList", ['items' => $items]);
+    }
+
+    public function addItemForm($cartId)
+    {
+        $item = Item::find($cartId);
+        return view("itemDetails", ["item" => $item]);
+    }
 }
