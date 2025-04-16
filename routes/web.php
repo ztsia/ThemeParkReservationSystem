@@ -58,8 +58,12 @@ Route::get('/', function () {
 | Home Routes
 |---------------
 */
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+/*Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [EventController::class, 'show'])->name('showEvents');
+Route::get('/', [ItemController::class, 'show'])->name('showItems');*/
 
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/items/{item}', [ItemController::class, 'show'])->name('showItems');
 
 
 

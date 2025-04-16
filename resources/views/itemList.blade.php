@@ -1,4 +1,7 @@
-<x-header />
+
+@extends('layouts.app')
+
+@section('title', 'HyperHeaven - Home')
 <h1>Item List</h1>
 <table>
   <tr>

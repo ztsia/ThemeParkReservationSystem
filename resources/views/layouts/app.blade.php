@@ -49,7 +49,17 @@
                         </ul>
 
                         <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ms-auto">
+                        <ul class="navbar-nav ms-auto align-items-center">
+                            <!-- Cart Icon -->
+                            @auth
+                                <li class="nav-item me-3">
+                                    <a class="nav-link position-relative"
+                                        href="{{ route('cartController.showCartList', ['userId' => Auth::id()]) }}">
+                                        🛒
+                                    </a>
+                                </li>
+
+                            @endauth
                             <!-- Authentication Links -->
                             @guest
                                 @if (Route::has('login'))
@@ -71,8 +81,13 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <!-- Edit Profile Link -->
+                                        <a class="dropdown-item" href="#">
+                                            Edit Profile
+                                        </a>
+                                        <!--For Logout-->
                                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
+                                                                     document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
 
@@ -90,6 +105,7 @@
         <main class="py-4">
             @yield('content')
         </main>
+
     </div>
 </body>
 
