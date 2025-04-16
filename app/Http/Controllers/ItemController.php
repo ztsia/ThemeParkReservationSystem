@@ -67,7 +67,7 @@ class ItemController extends Controller
 
         if ($request->hasFile('image')) {
             // Delete the old image if it exists
-            if ($item->image) {
+            if ($item->image && $item->image != 'images/default.jpg') {
                 Storage::disk('public')->delete($item->image);
             }
             // Store the new image
@@ -78,5 +78,16 @@ class ItemController extends Controller
         $item->update($data);
 
         return redirect()->route('home')->with('status', 'Item updated successfully.');
+    }
+
+    public function destroy(Item $item)
+    {
+        // Delete the image if it exists
+        if ($item->image && $item->image != 'images/default.jpg') {
+            Storage::disk('public')->delete($item->image);
+        }
+        $item->delete();
+
+        return redirect()->route('home')->with('status', 'Item deleted successfully.');
     }
 }

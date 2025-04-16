@@ -52,9 +52,13 @@ Route::group(['middleware' => ['auth', 'adminAccess']], function () {
     Route::post('/itemForm', [ItemController::class, 'store'])->name('item.create');
     Route::patch('/itemForm/{item}', [ItemController::class, 'update'])->name('item.edit');
 
+    Route::delete('/deleteItem/{item}', [ItemController::class, 'destroy'])->name('item.delete');
+
     //Events
     Route::get('/eventForm', [EventController::class, 'create'])->name('event.createForm');
     Route::get('/eventForm/{event}', [EventController::class, 'edit'])->name('event.editForm');
     Route::post('/eventForm', [EventController::class, 'store'])->name('event.create');
     Route::patch('/eventForm/{event}', [EventController::class, 'update'])->name('event.edit');
+
+    Route::delete('/deleteEvent/{event}', [EventController::class, 'destroy'])->name('event.delete');
 });

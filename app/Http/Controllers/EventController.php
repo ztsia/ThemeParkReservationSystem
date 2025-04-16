@@ -75,4 +75,15 @@ class EventController extends Controller
 
         return redirect()->route('home')->with('status', 'Event updated successfully.');
     }
+
+    public function destroy(Event $event)
+    {
+        // Delete the image if it exists
+        if ($event->image && $event->image != 'images/default.jpg') {
+            Storage::disk('public')->delete($event->image);
+        }
+        $event->delete();
+
+        return redirect()->route('home')->with('status', 'Event deleted successfully.');
+    }
 }
