@@ -33,6 +33,7 @@
                             <img src="{{ asset('storage/images/logo.png') }}" alt="Logo"
                                 style="height:80px; width:80px; border-radius:50%; object-fit:cover; margin-right: 10px;">
                             <p style="margin: 0;">HyperHeaven</p>
+                            <p>Hii</p>
                         </div>
 
                     </a>
