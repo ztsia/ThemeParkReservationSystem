@@ -5,14 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header">{{ isset($url) && $url === 'admin' ? __('Admin Login') : __('User Login') }}</div>
 
                 <div class="card-body">
-                    @php
-                        $loginRoute = isset($url) && $url === 'admin' ? route('login.admin') : route('login.user');
-                    @endphp
-
-                    <form method="POST" action="{{ $loginRoute }}" aria-label="{{ isset($url) && $url === 'admin' ? __('Admin Login') : __('User Login') }}">
+                    <form method="POST" action="{{ isset($url) && $url === 'admin' ? route('admin.login.submit') : route('user.login.submit') }}">
                         @csrf
 
                         <div class="row mb-3">
@@ -76,7 +72,11 @@
 
                     <hr>
                     <div class="text-center">
-                        <a class="btn btn-link" href="{{ route('login.admin') }}">Login as Admin</a>
+                        @if (isset($url) && $url === 'admin')
+                            <a class="btn btn-link" href="{{ route('login') }}">Login as User</a>
+                        @else
+                            <a class="btn btn-link" href="{{ route('login.admin') }}">Login as Admin</a>
+                        @endif
                     </div>
 
                 </div>

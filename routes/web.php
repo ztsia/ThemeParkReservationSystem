@@ -91,18 +91,18 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 |---------------
 */
 // Show login forms
-Route::get('login', [LoginController::class, 'showUserLoginForm'])->name('login');
-Route::get('login/admin', [LoginController::class, 'showAdminLoginForm'])->name('login.admin');
+Route::get('/login', [LoginController::class, 'showUserLoginForm'])->name('login');
+Route::get('/login/admin', [LoginController::class, 'showAdminLoginForm'])->name('login.admin');
 
 // Handle login POST
-Route::post('login', [LoginController::class, 'login'])->name('login.user');
-Route::post('login/admin', [LoginController::class, 'adminLogin'])->name('login.admin.submit');
+Route::post('/login', [LoginController::class, 'userLogin'])->name('user.login.submit');
+Route::post('/login/admin', [LoginController::class, 'adminLogin'])->name('admin.login.submit');
 
 // Show register forms
 Route::get('register', [RegisterController::class, 'showUserRegisterForm'])->name('register');
 Route::get('register/admin', [RegisterController::class, 'showAdminRegisterForm'])->name('register.admin');
 
 // Handle register POST
-Route::post('register', [RegisterController::class, 'create'])->name('register.user');
-Route::post('register/admin', [RegisterController::class, 'createAdmin'])->name('register.admin.submit');
+Route::post('register', [RegisterController::class, 'registerUser'])->name('register.user');
+Route::post('register/admin', [RegisterController::class, 'registerAdmin'])->name('admin.register.submit');
 

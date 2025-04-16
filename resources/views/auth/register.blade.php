@@ -9,10 +9,10 @@
 
                 <div class="card-body">
                     @php
-                        $registerRoute = isset($url) && $url === 'admin' ? route('register.admin.submit') : route('register.user');
+                    $registerRoute = isset($url) && $url === 'admin' ? route('admin.register.submit') : route('register.user');
                     @endphp
 
-                <form method="POST" action="{{ $registerRoute }}" aria-label="{{ isset($url) && $url === 'admin' ? __('Admin Register') : __('User Register') }}">
+                    <form method="POST" action="{{ isset($url) && $url === 'admin' ? route('admin.register.submit') : route('register.user') }}">
 
                         @csrf
 
@@ -72,9 +72,11 @@
                                     {{ __('Register') }}
 
                                 </button>
+                                 <!-- Optional: hidden input or checkbox if this is for admin -->
+    
                             </div>
                         </div>
-                        <a class="btn btn-link" href="{{ route('register.admin') }}">Register as Admin</a>
+                        <a href="{{ route('register.admin') }}">Register as Admin</a>
 
                     </form>
                 </div>
