@@ -10,10 +10,11 @@ class Cart extends Model
     protected $fillable = [
         'user_id',
         'item_id',
-        'date',
+        'ticket_date',
         'quantity',
         'user_category',
         'payment_type',
+        'payment_date',
     ];
     use HasFactory;
 
@@ -21,7 +22,7 @@ class Cart extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
+
     public function item()
     {
         return $this->belongsTo(Item::class);

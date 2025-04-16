@@ -1,0 +1,121 @@
+[33mcommit 61cc0aafabbcd101bb657cf4e3fd8f105d60142a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature-cart[m[33m)[m
+Author: Lanaetan <peiyantan03@gmail.com>
+Date:   Sat Apr 12 12:21:52 2025 +0800
+
+    Added checkout, onlineBanking, credit/debitCard
+
+[33mcommit 5074c0c198c6e19b8c0d5b452a18a2e8f31a8a18[m[33m ([m[1;31morigin/feature-cart[m[33m)[m
+Author: Lanaetan <peiyantan03@gmail.com>
+Date:   Mon Mar 17 15:48:05 2025 +0800
+
+    Fixed add item to cart function, added total price
+
+[33mcommit c670a1c5b27cc13cc333f35a0c46d7c824289c4d[m
+Author: Lanaetan <peiyantan03@gmail.com>
+Date:   Mon Mar 17 13:59:52 2025 +0800
+
+    Added add, minus, and delete cart items functions to the cart
+
+[33mcommit 6a9980a7f9b149e0f57a2c6998dc06cb5d9cad26[m
+Merge: 26ff3fb 732bebe
+Author: Lanaetan <peiyantan03@gmail.com>
+Date:   Sun Mar 16 22:13:42 2025 +0800
+
+    Added itemList and  itemDetails page for testing purpose
+
+[33mcommit 26ff3fb3aa04c17be10ad6b13760d89ec3922009[m
+Author: Lanaetan <peiyantan03@gmail.com>
+Date:   Sun Mar 16 12:44:42 2025 +0800
+
+    added testview.blade.php for testing purpose
+
+[33mcommit 732bebe4d7bd829a8ceca5ae91c5dc300090dd42[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: stella-03 <stellaheng01@gmail.com>
+Date:   Tue Mar 11 11:51:10 2025 +0800
+
+    hiii
+
+[33mcommit e8befc39a8a95d89d2543e69c512dadae27d8553[m
+Author: stella-03 <stellaheng01@gmail.com>
+Date:   Tue Mar 11 11:47:13 2025 +0800
+
+    remove env file
+
+[33mcommit 0e5e57af164572a791ee9e8b88ff97e46d0799a1[m
+Author: ztsia <leosia929@gmail.com>
+Date:   Tue Mar 11 11:24:47 2025 +0800
+
+    added event model and mfs
+
+[33mcommit 82166d6f354b46cc51c179dc66736a20c9b7d84e[m
+Author: ztsia <leosia929@gmail.com>
+Date:   Tue Mar 11 10:57:06 2025 +0800
+
+    test4
+
+[33mcommit b3e472793ef46f335096aa6601b06fa44bd1e84c[m
+Merge: 00836bd 962c815
+Author: ztsia <leosia929@gmail.com>
+Date:   Tue Mar 11 10:52:28 2025 +0800
+
+    Merge branch 'main' of https://github.com/ztsia/ThemeParkReservationSystem
+
+[33mcommit 00836bd8ce33dd4f4fa9473e5f038ea0fa751da6[m
+Author: ztsia <leosia929@gmail.com>
+Date:   Tue Mar 11 10:47:55 2025 +0800
+
+    test3
+
+[33mcommit 962c815ebbec9c2673e6d4f6ff2b3e66f4a9506c[m
+Author: yyeeqii <yyeeqii@gmail.com>
+Date:   Tue Mar 11 10:47:41 2025 +0800
+
+    test2
+
+[33mcommit 0f7c45eee30f347176c86e90b15655cbee79f77d[m
+Author: yyeeqii <yyeeqii@gmail.com>
+Date:   Tue Mar 11 10:44:58 2025 +0800
+
+    test
+
+[33mcommit e9bbb8c43ad904ca431125dc33ce4d0c099412c1[m
+Author: yyeeqii <yyeeqii@gmail.com>
+Date:   Mon Mar 10 22:28:21 2025 +0800
+
+    testt
+
+[33mcommit 5dc52c224f32d967b5d14376a246c499829a469f[m
+Author: ztsia <leosia929@gmail.com>
+Date:   Sun Mar 9 16:03:09 2025 +0800
+
+    created models (including mfs) based on ERD
+
+[33mcommit f9b7efd823905638094345d972573f3cb879f440[m
+Author: Sia Zhong Tai <leosia929@gmail.com>
+Date:   Wed Mar 5 12:34:48 2025 +0800
+
+    Removed test comment
+
+[33mcommit 0673d814778854f48ba5c64e0414bd2edfb76f8a[m
+Author: ztsia <leosia929@gmail.com>
+Date:   Wed Mar 5 12:32:08 2025 +0800
+
+    test1
+
+[33mcommit 452dc6c33816d9e68c28e28c8406db41991c516d[m
+Author: Sia Zhong Tai <leosia929@gmail.com>
+Date:   Wed Mar 5 12:16:28 2025 +0800
+
+    test2.php
+
+[33mcommit 42a8a39c395861f0b18c7e1378d82badeb8b2863[m
+Author: ztsia <leosia929@gmail.com>
+Date:   Wed Mar 5 12:11:54 2025 +0800
+
+    test
+
+[33mcommit 6ca7a047b4bd82e9ca92f8b8e6fa61a1487df8fb[m
+Author: ztsia <leosia929@gmail.com>
+Date:   Wed Mar 5 12:05:41 2025 +0800
+
+    first commit

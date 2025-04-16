@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -36,5 +38,52 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->middleware('guest:admin')->except('logout');
     }
+
+    public function showUserLoginForm()
+{
+    return view('auth.login'); // you can pass 'url' if you use conditional logic in the blade
+}
+
+public function showAdminLoginForm()
+{
+    return view('auth.login', ['url' => 'admin']);
+}
+
+
+public function userLogin(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
+
+    $credentials = $request->only('email', 'password');
+    $credentials['is_admin'] = 0; // user only
+
+    if (Auth::attempt($credentials)) {
+        return redirect()->intended('/dashboard'); // your user dashboard
+    }
+
+    return back()->withErrors(['email' => 'Invalid credentials or not a user.']);
+}
+
+
+public function adminLogin(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
+
+    $credentials = $request->only('email', 'password');
+    $credentials['is_admin'] = 1; // admin only
+
+    if (Auth::attempt($credentials)) {
+        return redirect()->intended('/admin/dashboard'); // your admin dashboard
+    }
+
+    return back()->withErrors(['email' => 'Invalid credentials or not an admin.']);
+}
 }

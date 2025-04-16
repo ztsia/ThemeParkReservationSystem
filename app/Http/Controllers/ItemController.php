@@ -9,6 +9,15 @@ use App\Models\Item;
 class ItemController extends Controller
 {
     /**
+     * Display all items.
+     */
+    public function showItemList()
+    {
+        $items = Item::paginate(10);
+        return view("itemList", ['items' => $items]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

@@ -20,8 +20,8 @@ class CreateCartsTable extends Migration
             $table->date('ticket_date');
             $table->integer('quantity');
             $table->String('user_category');
-            $table->String('payment_type');
-            $table->date('payment_date');
+            $table->string('payment_type')->nullable();
+            $table->date('payment_date')->nullable();
             $table->timestamps();
         });
     }
