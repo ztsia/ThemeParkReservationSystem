@@ -86,7 +86,8 @@ Route::group(['middleware' => ['auth', 'adminAccess']], function () {
 | Cart Routes
 |---------------
 */
-// Cart
+Route::group(['middleware' => ['cart']], function () {
+    // Cart
 Route::post("/addItem", [CartController::class, "addItem"])->name("cartController.addItem");
 Route::get("/cartList/{userId}", [CartController::class, "showCartList"])->name("cartController.showCartList");
 Route::post("/updateCart", [CartController::class, "updateCart"])->name("cartController.updateCart");
@@ -100,3 +101,6 @@ Route::post("/onlineBanking", [PaymentController::class, "onlineBanking"])->name
 Route::get("/creditCard", [PaymentController::class, "showCreditCardForm"])->name("paymentController.showCreditCardForm");
 Route::post("/creditCard", [PaymentController::class, "creditCard"])->name("paymentController.creditCard");
 Route::get("/cash", [PaymentController::class, "cash"])->name("paymentController.cash");
+});
+
+

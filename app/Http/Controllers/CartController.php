@@ -10,33 +10,37 @@ class CartController extends Controller
 {
   public function addItem(Request $request)
   {
-    $data = $request->all();
-    $data['user_id'] = Auth::id();
-    $data['item_id'] = $request->itemId;
-    $data['ticket_date'] = $request->ticketDate;
-    $data['user_category'] = $request->userCategory;
-    $data['payment_type'] = null;
-    $data['payment_date'] = null;
+    if (Auth::check()) {
+      $data = $request->all();
+      $data['user_id'] = Auth::id();
+      $data['item_id'] = $request->itemId;
+      $data['ticket_date'] = $request->ticketDate;
+      $data['user_category'] = $request->userCategory;
+      $data['payment_type'] = null;
+      $data['payment_date'] = null;
 
-    // Check if the cart has an existing record with the same user_id, item_id, and payment_status IS NULL
-    $cart = Cart::where('user_id', $data['user_id'])
-      ->where('item_id', $data['itemId'])
-      ->where('ticket_date', $data['ticketDate'])
-      ->where('user_category', $data['userCategory'])
-      ->whereNull('payment_date')
-      ->first();
+      // Check if the cart has an existing record with the same user_id, item_id, and payment_status IS NULL
+      $cart = Cart::where('user_id', $data['user_id'])
+        ->where('item_id', $data['itemId'])
+        ->where('ticket_date', $data['ticketDate'])
+        ->where('user_category', $data['userCategory'])
+        ->whereNull('payment_date')
+        ->first();
 
-    if ($cart) {
-      // If cart exists, update quantity
-      $cart->update([
-        'quantity' => $cart->quantity + $data['quantity'], // Increase quantity
-      ]);
+      if ($cart) {
+        // If cart exists, update quantity
+        $cart->update([
+          'quantity' => $cart->quantity + $data['quantity'], // Increase quantity
+        ]);
+      } else {
+        // If no matching cart record, create a new one
+        Cart::create($data);
+      }
+
+      return redirect()->route('home')->with('status', 'Item added to cart successfully!');
     } else {
-      // If no matching cart record, create a new one
-      Cart::create($data);
+      return redirect()->route('login')->with('status', 'Please login to add items to your cart.');
     }
-
-    return redirect()->route('home')->with('status', 'Item added to cart successfully!');
   }
 
   // display cart page
