@@ -14,6 +14,17 @@ class EventSeeder extends Seeder
      */
     public function run()
     {
-        Event::factory()->count(5)->create();
+        Event::create([
+            'name' => 'Fire Show',
+            'description' => 'Experience the thrill of our magical fire show!',
+            'image' => 'images/events/fireshow.jpg',
+            'date' => now()->addDays(7), // Event date
+        ]);
+        Event::create([
+            'name' => 'Family Day',
+            'description' => 'Join us for a fun-filled family day with games and activities for all ages!',
+            'image' => 'images/events/familyday.jpg', 
+            'date' => now()->addDays(14), // Event date
+        ]);
     }
 }
