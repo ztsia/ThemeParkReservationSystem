@@ -1,147 +1,135 @@
-<style>
-  table {
-    border: 2px solid black;
-    border-collapse: collapse;
-    width: 100%;
-    text-align: center;
-  }
+@extends('layouts.app')
 
-  th,
-  td {
-    border: 1px solid black;
-    text-align: center;
-  }
+@section('title', 'HyperHeaven - Cart')
 
-  .quantity-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .quantity-container form {
-    display: inline-block;
-  }
-
-  .quantity-container button {
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    border: 1px solid black;
-    background-color: white;
-    cursor: pointer;
-  }
-
-  .quantity-container p {
-    margin: 0;
-    font-weight: bold;
-    min-width: 20px;
-    text-align: center;
-  }
-</style>
-
-<h1>Your Cart</h1>
-
-<div class="container">
-  <table>
-    <tr>
-      <th>Item</th>
-      <th>Date</th>
-      <th>UserCategory</th>
-      <th>Quantity</th>
-      <th>Price</th>
-      <th>Subtotal</th>
-      <th>Delete</th>
-    </tr>
-
-    @foreach($items as $item)
-    <tr>
-      <td>{{ $item->item->name }}</td>
-      <td>{{ $item->ticket_date }}</td>
-      <td>{{ $item->user_category }}</td>
-      <td>
-        <div class="quantity-container">
-
-          {{-- Decrease cart item quantity --}}
-          <form action="{{ route('cartController.updateCart') }}" method="POST">
-            @csrf
-
-            <input type="hidden" name="cartId" value="{{ $item->id }}">
-            <input type="hidden" name="quantity" value="{{ $item->quantity - 1 }}">
-            <button type="submit">-</button>
-          </form>
-
-          {{-- Display specific cart item quantity --}}
-          <p>{{ $item->quantity }}</p>
-
-          {{-- Increase cart item quantity --}}
-          <form action="{{ route('cartController.updateCart') }}" method="POST">
-            @csrf
-
-            <input type="hidden" name="cartId" value="{{ $item->id }}">
-            <input type="hidden" name="quantity" value="{{ $item->quantity + 1 }}">
-            <button type="submit">+</button>
-          </form>
-
+@section('content')
+<div class="container py-4">
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0">Your Cart</h2>
         </div>
-      </td>
-      <td>
-        @php
-        // Retrieve the item's price based on user category
-        $itemPrice = $item->item->getPriceByCategory($item->user_category);
-        @endphp
-        RM{{ number_format($itemPrice, 2) }}
-      </td>
-      <td>
-        @php
-        // Retrieve the item's price based on user category
-        $itemPrice = $item->item->getPriceByCategory($item->user_category);
-        $subtotal = $itemPrice * $item->quantity;
-        @endphp
-        RM{{ number_format($subtotal, 2) }}
-      </td>
-      <td>
-        <a href="{{ route('cartController.deleteCart', $item->id) }}">Delete</a>
-      </td>
-    </tr>
-    @endforeach
-  </table>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Item</th>
+                            <th>Date</th>
+                            <th>User Category</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Subtotal</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($items as $item)
+                        <tr>
+                            <td class="align-middle">{{ $item->item->name }}</td>
+                            <td class="align-middle">{{ $item->ticket_date }}</td>
+                            <td class="align-middle">{{ $item->user_category }}</td>
+                            <td class="align-middle">
+                                <div class="d-flex align-items-center justify-content-center gap-2">
+                                    <form action="{{ route('cartController.updateCart') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="cartId" value="{{ $item->id }}">
+                                        <input type="hidden" name="quantity" value="{{ $item->quantity - 1 }}">
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary">-</button>
+                                    </form>
 
-  {{-- Display total price --}}
-  <div>
-    <h2>Summary</h2>
-    @php
-    $total = 0; // Initialize total
-    @endphp
+                                    <span class="fw-bold">{{ $item->quantity }}</span>
 
-    @foreach ($items as $item)
-    @php
-    // Retrieve the item's price based on user category
-    $itemPrice = $item->item->getPriceByCategory($item->user_category);
-    $subtotal = $itemPrice * $item->quantity;
-    $total += $subtotal;
-    @endphp
-    @endforeach
-
-    <p>Subtotal: RM{{ number_format($total, 2) }}</p>
-    <p>Tax (6%): RM{{ number_format($total * 0.06, 2) }}</p>
-    <p>Total Price: RM{{ number_format($total * 1.06, 2) }}</p>
-  </div>
-  <div>
-    <div>
-      <form action="{{ route('cartController.showCheckoutForm', ['userId' => auth()->id()]) }}" method="GET">
-        <input type="submit" value="Checkout">
-      </form>
+                                    <form action="{{ route('cartController.updateCart') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="cartId" value="{{ $item->id }}">
+                                        <input type="hidden" name="quantity" value="{{ $item->quantity + 1 }}">
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary">+</button>
+                                    </form>
+                                </div>
+                            </td>
+                            <td class="align-middle">
+                                @php
+                                // Retrieve the item's price based on user category
+                                $itemPrice = $item->item->getPriceByCategory($item->user_category);
+                                @endphp
+                                <span class="text-secondary">RM{{ number_format($itemPrice, 2) }}</span>
+                            </td>
+                            <td class="align-middle fw-bold">
+                                @php
+                                // Retrieve the item's price based on user category
+                                $itemPrice = $item->item->getPriceByCategory($item->user_category);
+                                $subtotal = $itemPrice * $item->quantity;
+                                @endphp
+                                RM{{ number_format($subtotal, 2) }}
+                            </td>
+                            <td class="align-middle">
+                                <a href="{{ route('cartController.deleteCart', $item->id) }}" class="btn btn-sm btn-danger">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-@if(session('success'))
-<div style="color:green">
-  {{ session('success') }}
+    <div class="row">
+        <div class="col-md-6 offset-md-6">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h4 class="mb-0">Order Summary</h4>
+                </div>
+                <div class="card-body">
+                    @php
+                    $total = 0; // Initialize total
+                    @endphp
+
+                    @foreach ($items as $item)
+                    @php
+                    // Retrieve the item's price based on user category
+                    $itemPrice = $item->item->getPriceByCategory($item->user_category);
+                    $subtotal = $itemPrice * $item->quantity;
+                    $total += $subtotal;
+                    @endphp
+                    @endforeach
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal:</span>
+                        <span class="fw-bold">RM{{ number_format($total, 2) }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Tax (6%):</span>
+                        <span class="fw-bold">RM{{ number_format($total * 0.06, 2) }}</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="fs-5">Total Price:</span>
+                        <span class="fs-5 fw-bold text-primary">RM{{ number_format($total * 1.06, 2) }}</span>
+                    </div>
+
+                    <form action="{{ route('cartController.showCheckoutForm', ['userId' => auth()->id()]) }}" method="GET">
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">Proceed to Checkout</button>
+                            <a href="{{ route('home') }}" class="btn btn-outline-secondary">Continue Shopping</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @elseif(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
 </div>
-@elseif(session('error'))
-<div style="color:red">
-  {{ session('error') }}
-</div>
-@endif
+@endsection

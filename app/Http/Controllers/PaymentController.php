@@ -19,7 +19,7 @@ class PaymentController extends Controller
             $item->save();
         }
 
-        return redirect()->route('home')->with('success', 'Payment successful!');
+        return redirect()->route('home')->with('status', 'Payment successful with cash!');
     }
 
     public function onlineBanking(Request $request)

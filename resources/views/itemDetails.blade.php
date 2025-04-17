@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            @can('isUser')
+            @cannot('isAdmin')
             <!-- Booking Form -->
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
