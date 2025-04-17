@@ -16,7 +16,7 @@ class EventFactory extends Factory
         return [
             'name' => $this->faker->sentence(3),
             'description' => $this->faker->paragraph(2),
-            'image' => 'images/default.jpg', // Default image path
+            'image' => 'images/events/fireshow.jpg', // Default image path
             'date' => $this->faker->dateTimeBetween('now', '+1 year'),
         ];
     }

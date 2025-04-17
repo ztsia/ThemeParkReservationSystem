@@ -9,6 +9,32 @@ use App\Models\Item;
 class ItemController extends Controller
 {
     /**
+     * Display all items.
+     */
+    //public function showItemList()
+    //{
+        //$items = Item::paginate(10);
+      //  return view("itemList", ['items' => $items]);
+    //}
+    
+    public function show($id)
+    {
+        $item = Item::find($id);  // Retrieve the item by ID
+        if (!$item) {
+            abort(404);  // Handle case if item is not found
+        }
+        return view('itemDetails', compact('item'));  // Pass the item to the view
+    }
+    
+    // Define a route for viewing a single item
+
+
+    public function detail($id) {
+        $item = Item::findOrFail($id);
+        return view('item_detail', ['item' => $item]);
+    }
+    
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

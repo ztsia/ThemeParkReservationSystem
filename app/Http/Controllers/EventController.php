@@ -76,6 +76,11 @@ class EventController extends Controller
         return redirect()->route('home')->with('status', 'Event updated successfully.');
     }
 
+    public function show(){
+        $events = Event::all();
+        return view('home', ['events' => $events]);
+    }
+
     public function destroy(Event $event)
     {
         // Delete the image if it exists

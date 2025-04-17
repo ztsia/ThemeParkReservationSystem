@@ -54,8 +54,8 @@ Route::get('logout', [LoginController::class, 'logout']);
 |---------------
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get("/itemList", [HomeController::class, "showItemList"])->name("itemController.showItemList");
-Route::get("/addItemForm/{cartId}", [HomeController::class, "addItemForm"])->name("cartController.addItemForm");
+Route::get('/items/{item}', [ItemController::class, 'show'])->name('showItems');
+
 
 
 
@@ -86,17 +86,17 @@ Route::group(['middleware' => ['auth', 'adminAccess']], function () {
 | Cart Routes
 |---------------
 */
-// only users who have login can access
-Route::group(['middleware' => 'auth'], function () {
-    Route::post("/addItem", [CartController::class, "addItem"])->name("cartController.addItem");
-    Route::get("/cartList/{userId}", [CartController::class, "showCartList"])->name("cartController.showCartList");
-    Route::post("/updateCart", [CartController::class, "updateCart"])->name("cartController.updateCart");
-    Route::get("/deleteCart/{cartId}", [CartController::class, "deleteCart"])->name("cartController.deleteCart");
-    Route::get("/checkout/{userId}", [CartController::class, "showCheckoutForm"])->name("cartController.showCheckoutForm");
-    Route::post("/checkout", [CartController::class, "checkout"])->name("cartController.checkout");
-    Route::get("/onlineBanking", [PaymentController::class, "showOnlineBankingForm"])->name("paymentController.showOnlineBankingForm");
-    Route::post("/onlineBanking", [PaymentController::class, "onlineBanking"])->name("paymentController.onlineBanking");
-    Route::get("/creditCard", [PaymentController::class, "showCreditCardForm"])->name("paymentController.showCreditCardForm");
-    Route::post("/creditCard", [PaymentController::class, "creditCard"])->name("paymentController.creditCard");
-    Route::get("/cash/{userId}", [PaymentController::class, "cash"])->name("paymentController.cash");
-});
+// Cart
+Route::post("/addItem", [CartController::class, "addItem"])->name("cartController.addItem");
+Route::get("/cartList/{userId}", [CartController::class, "showCartList"])->name("cartController.showCartList");
+Route::post("/updateCart", [CartController::class, "updateCart"])->name("cartController.updateCart");
+Route::get("/deleteCart/{cartId}", [CartController::class, "deleteCart"])->name("cartController.deleteCart");
+Route::get("/checkout", [CartController::class, "showCheckoutForm"])->name("cartController.showCheckoutForm");
+Route::post("/checkout", [CartController::class, "checkout"])->name("cartController.checkout");
+
+// Payment
+Route::get("/onlineBanking", [PaymentController::class, "showOnlineBankingForm"])->name("paymentController.showOnlineBankingForm");
+Route::post("/onlineBanking", [PaymentController::class, "onlineBanking"])->name("paymentController.onlineBanking");
+Route::get("/creditCard", [PaymentController::class, "showCreditCardForm"])->name("paymentController.showCreditCardForm");
+Route::post("/creditCard", [PaymentController::class, "creditCard"])->name("paymentController.creditCard");
+Route::get("/cash", [PaymentController::class, "cash"])->name("paymentController.cash");

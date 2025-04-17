@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\Event;
+use Illuminate\Http\Request;
 use App\Models\Cart;
 
 class HomeController extends Controller
@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -25,21 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $items = Item::all();
+        $events = Event::all();
+    
+        return view('home', compact('items', 'events'));
     }
-
-    /**
-     * Display all items.
-     */
-    public function showItemList()
-    {
-        $items = Item::paginate(10);
-        return view("itemList", ['items' => $items]);
-    }
-
-    public function addItemForm($cartId)
-    {
-        $item = Item::find($cartId);
-        return view("itemDetails", ["item" => $item]);
-    }
+    
 }
