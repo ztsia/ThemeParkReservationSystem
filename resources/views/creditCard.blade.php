@@ -1,3 +1,8 @@
+@extends('layouts.app')
+
+@section('title', 'HyperHeaven - Credit Card Payment')
+
+@section('content')
 <h1>Credit Card Payment</h1>
 <form action="{{ route('paymentController.creditCard') }}" method="POST">
     @csrf

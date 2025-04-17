@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Item;
@@ -97,7 +96,7 @@ class CartController extends Controller
         return redirect()->route('paymentController.showCreditCardForm');
         break;
       case "cashPaymentAtPhysicalStores":
-        return redirect()->route('paymentController.cash', ['userId' => auth()->id()]);
+        return redirect()->route('paymentController.cash');
         break;
       default:
         return redirect()->back()->withErrors([

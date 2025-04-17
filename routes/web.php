@@ -39,7 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post("/onlineBanking", [PaymentController::class, "onlineBanking"])->name("paymentController.onlineBanking");
     Route::get("/creditCard", [PaymentController::class, "showCreditCardForm"])->name("paymentController.showCreditCardForm");
     Route::post("/creditCard", [PaymentController::class, "creditCard"])->name("paymentController.creditCard");
-    Route::get("/cash/{userId}", [PaymentController::class, "cash"])->name("paymentController.cash");
+    Route::get("/cash", [PaymentController::class, "cash"])->name("paymentController.cash");
 });
 
 Route::get('/', function () {
@@ -109,4 +109,3 @@ Route::get('register/admin', [RegisterController::class, 'showAdminRegisterForm'
 // Handle register POST
 Route::post('register', [RegisterController::class, 'registerUser'])->name('register.user');
 Route::post('register/admin', [RegisterController::class, 'registerAdmin'])->name('admin.register.submit');
-

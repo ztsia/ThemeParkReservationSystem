@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\CartController;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    public function cash($userId)
+    public function cash()
     {
-        $unpaidCartItems = CartController::getUnpaidCartItems($userId);
+        $unpaidCartItems = CartController::getUnpaidCartItems(Auth::id());
 
         // update payment type and date
         foreach ($unpaidCartItems as $item) {

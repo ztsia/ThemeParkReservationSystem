@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'HyperHeaven - Home')
+@section('title', 'HyperHeaven - Checkout')
 
 @section('content')
 <h1>Checkout</h1>

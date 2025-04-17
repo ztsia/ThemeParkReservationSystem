@@ -51,15 +51,22 @@
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ms-auto align-items-center">
                             <!-- Cart Icon -->
-                            @auth
+                            <!-- if user is login, direct to cart, else direct to login page -->
+                            @can('isLogin')
                             <li class="nav-item me-3">
                                 <a class="nav-link position-relative"
                                     href="{{ route('cartController.showCartList', ['userId' => Auth::id()]) }}">
                                     🛒
                                 </a>
                             </li>
-
-                            @endauth
+                            @else
+                            <li class="nav-item me-3">
+                                <a class="nav-link position-relative"
+                                    href="{{ route('login') }}">
+                                    🛒
+                                </a>
+                            </li>
+                            @endcan
                             <!-- Authentication Links -->
                             @guest
                             @if (Route::has('login'))
