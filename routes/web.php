@@ -29,12 +29,15 @@ Route::get("/addItemForm/{cartId}", [CartController::class, "addItemForm"])->nam
 
 // only users who have login can access
 Route::group(['middleware' => 'auth'], function () {
+    // Cart
     Route::post("/addItem", [CartController::class, "addItem"])->name("cartController.addItem");
     Route::get("/cartList/{userId}", [CartController::class, "showCartList"])->name("cartController.showCartList");
     Route::post("/updateCart", [CartController::class, "updateCart"])->name("cartController.updateCart");
     Route::get("/deleteCart/{cartId}", [CartController::class, "deleteCart"])->name("cartController.deleteCart");
-    Route::get("/checkout/{userId}", [CartController::class, "showCheckoutForm"])->name("cartController.showCheckoutForm");
+    Route::get("/checkout", [CartController::class, "showCheckoutForm"])->name("cartController.showCheckoutForm");
     Route::post("/checkout", [CartController::class, "checkout"])->name("cartController.checkout");
+
+    // Payment
     Route::get("/onlineBanking", [PaymentController::class, "showOnlineBankingForm"])->name("paymentController.showOnlineBankingForm");
     Route::post("/onlineBanking", [PaymentController::class, "onlineBanking"])->name("paymentController.onlineBanking");
     Route::get("/creditCard", [PaymentController::class, "showCreditCardForm"])->name("paymentController.showCreditCardForm");

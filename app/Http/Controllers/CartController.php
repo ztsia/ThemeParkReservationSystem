@@ -50,7 +50,7 @@ class CartController extends Controller
   public function showCartList($userId)
   {
     $data = $this->getUnpaidCartItems($userId); // find unpaid cart items
-    return view("cart", ["items" => $data]);
+    return view("cart.cart", ["items" => $data]);
   }
 
   // update cart item quantity

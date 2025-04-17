@@ -3,8 +3,50 @@
 @section('title', 'HyperHeaven - Cart')
 
 @section('content')
+<!-- <style>
+  table {
+    border: 2px solid black;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+  }
+
+  th,
+  td {
+    border: 1px solid black;
+    text-align: center;
+  }
+
+  .quantity-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .quantity-container form {
+    display: inline-block;
+  }
+
+  .quantity-container button {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid black;
+    background-color: white;
+    cursor: pointer;
+  }
+
+  .quantity-container p {
+    margin: 0;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+  }
+</style> -->
 
 <h1>Your Cart</h1>
+
 <div class="container">
   <table>
     <tr>
