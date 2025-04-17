@@ -30,15 +30,12 @@
                     <!-- Edit navbar, title, logo here -->
                     <a class="navbar-brand" href="{{ url('/') }}">
                         <div style="display: flex; align-items: center;">
-                            <img src="{{ asset('storage/images/logo.png') }}" alt="Logo"
-                                style="height:80px; width:80px; border-radius:50%; object-fit:cover; margin-right: 10px;">
+                            <img src="{{ asset('storage/images/logo.png') }}" alt="Logo" style="height:80px; width:80px; border-radius:50%; object-fit:cover; margin-right: 10px;">
                             <p style="margin: 0;">HyperHeaven</p>
                         </div>
 
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
@@ -50,23 +47,23 @@
 
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ms-auto align-items-center">
+                            @cannot('isAdmin')
                             <!-- Cart Icon -->
                             <!-- if user is login, direct to cart, else direct to login page -->
                             @can('isLogin')
                             <li class="nav-item me-3">
-                                <a class="nav-link position-relative"
-                                    href="{{ route('cartController.showCartList', ['userId' => Auth::id()]) }}">
+                                <a class="nav-link position-relative" href="{{ route('cartController.showCartList', ['userId' => Auth::id()]) }}">
                                     🛒
                                 </a>
                             </li>
                             @else
                             <li class="nav-item me-3">
-                                <a class="nav-link position-relative"
-                                    href="{{ route('login') }}">
+                                <a class="nav-link position-relative" href="{{ route('login') }}">
                                     🛒
                                 </a>
                             </li>
                             @endcan
+                            @endcannot
                             <!-- Authentication Links -->
                             @guest
                             @if (Route::has('login'))
@@ -82,8 +79,7 @@
                             @endif
                             @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 

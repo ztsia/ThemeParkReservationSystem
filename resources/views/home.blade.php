@@ -23,6 +23,23 @@
                     <p class="card-text">{{ $event->description }}</p>
                     <p class="text-muted">Date: {{ \Carbon\Carbon::parse($event->date)->format('F j, Y') }}</p>
                 </div>
+                {{-- admin only --}}
+                @can('isAdmin')
+                <div class="card-footer text-muted">
+                    <h6 class="mb-2 text-uppercase fw-bold">Admin Actions</h6>
+                    <a href="{{ route('event.editForm', ['event' => $event->id]) }}" class="btn btn-info">Edit Event</a>
+                    
+                    <form method="POST" action="{{ route('event.delete', ['event' => $event->id]) }}" style="display:inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger" 
+                                onclick="return confirm('Are you sure you want to delete this event?')">
+                            Delete Event
+                        </button>
+                    </form>
+                </div>
+                @endcan
+
             </div>
         </div>
         @endforeach
@@ -38,6 +55,21 @@
                     <p class="card-text">{{ $item->description }}</p>
                     <a href="{{ route('showItems', ['item' => $item->id]) }}" class="btn btn-primary">See Details</a>
                 </div>
+                @can('isAdmin')
+                <div class="card-footer text-muted">
+                    <h6 class="mb-2 text-uppercase fw-bold">Admin Actions</h6>
+                    <a href="{{ route('item.editForm', ['item' => $item->id]) }}" class="btn btn-info">Edit Item</a>
+                    
+                    <form method="POST" action="{{ route('item.delete', ['item' => $item->id]) }}" style="display:inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger" 
+                                onclick="return confirm('Are you sure you want to delete this item?')">
+                            Delete Item
+                        </button>
+                    </form>
+                </div>
+                @endcan
             </div>
         </div>
         @endforeach

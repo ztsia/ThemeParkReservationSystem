@@ -5,25 +5,24 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Item;
+use App\Models\Cart;
 
 class ItemController extends Controller
 {
-    /**
-     * Display all items.
-     */
-    //public function showItemList()
-    //{
-        //$items = Item::paginate(10);
-      //  return view("itemList", ['items' => $items]);
-    //}
-    
+
     public function show($id)
     {
         $item = Item::find($id);  // Retrieve the item by ID
         if (!$item) {
-            return redirect()->route('home')->with('status', 'Item not found.');  // Redirect back with an error message if the item is not found
+            return redirect()->route('home')->with('status', 'Item not found.');
         }
-        return view('itemDetails', compact('item'));  // Pass the item to the view
+        
+        // Calculate cart statistics
+        $paidCart = Cart::where('item_id', $id)->whereNotNull('payment_date')->count();
+        $unpaidCart = Cart::where('item_id', $id)->whereNull('payment_date')->count();
+        
+        // Pass all variables to the view
+        return view('itemDetails', compact('item', 'paidCart', 'unpaidCart'));
     }
     
     /**

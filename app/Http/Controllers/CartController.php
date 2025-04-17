@@ -36,7 +36,7 @@ class CartController extends Controller
       Cart::create($data);
     }
 
-    return redirect()->back()->with('success', 'Item added to cart successfully!');
+    return redirect()->route('home')->with('status', 'Item added to cart successfully!');
   }
 
   // display cart page
