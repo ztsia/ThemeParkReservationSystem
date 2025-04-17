@@ -28,11 +28,10 @@
                 <h5 class="card-title">{{ $item->name }}</h5>
                 <p class="card-text">{{ $item->description }}</p>
                 <a href="{{ route('showItems', ['item' => $item->id]) }}" class="btn btn-primary">See Details</a>
-                </div>
+            </div>
         </div>
     </div>
     @endforeach
 </div>
-
 
 @endsection

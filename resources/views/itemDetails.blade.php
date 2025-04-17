@@ -1,7 +1,7 @@
 
 @extends('layouts.app')
 
-@section('title', 'HyperHeaven - Home')
+@section('title', 'HyperHeaven - Item')
 
 @section('content')
 <h1>Item Details for {{ $item->name }}</h1>
@@ -17,10 +17,6 @@
 
 <form action="{{ route('cartController.addItem') }}" method="POST">
   @csrf
-
-  @auth
-    <input type="hidden" name="userId" value="{{ auth()->user()->id }}">
-  @endauth
 
   <input type="hidden" name="itemId" value="{{ $item->id }}">
 

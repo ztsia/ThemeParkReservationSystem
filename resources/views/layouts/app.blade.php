@@ -33,7 +33,6 @@
                             <img src="{{ asset('storage/images/logo.png') }}" alt="Logo"
                                 style="height:80px; width:80px; border-radius:50%; object-fit:cover; margin-right: 10px;">
                             <p style="margin: 0;">HyperHeaven</p>
-                            <p>Hii</p>
                         </div>
 
                     </a>
@@ -53,50 +52,50 @@
                         <ul class="navbar-nav ms-auto align-items-center">
                             <!-- Cart Icon -->
                             @auth
-                                <li class="nav-item me-3">
-                                    <a class="nav-link position-relative"
-                                        href="{{ route('cartController.showCartList', ['userId' => Auth::id()]) }}">
-                                        🛒
-                                    </a>
-                                </li>
+                            <li class="nav-item me-3">
+                                <a class="nav-link position-relative"
+                                    href="{{ route('cartController.showCartList', ['userId' => Auth::id()]) }}">
+                                    🛒
+                                </a>
+                            </li>
 
                             @endauth
                             <!-- Authentication Links -->
                             @guest
-                                @if (Route::has('login'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                    </li>
-                                @endif
+                            @if (Route::has('login'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            @endif
 
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                @endif
+                            @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                            @endif
                             @else
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->name }}
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <!-- Edit Profile Link -->
+                                    <a class="dropdown-item" href="#">
+                                        Edit Profile
+                                    </a>
+                                    <!--For Logout-->
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
                                     </a>
 
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <!-- Edit Profile Link -->
-                                        <a class="dropdown-item" href="#">
-                                            Edit Profile
-                                        </a>
-                                        <!--For Logout-->
-                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                     document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
                             @endguest
                         </ul>
                     </div>

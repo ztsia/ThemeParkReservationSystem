@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
-use App\Models\User;
 use App\Models\Item;
 
 class CartController extends Controller
@@ -20,7 +19,7 @@ class CartController extends Controller
   public function addItem(Request $request)
   {
     $data = $request->all();
-    $data['user_id'] = $request->userId;
+    $data['user_id'] = Auth::id();
     $data['item_id'] = $request->itemId;
     $data['ticket_date'] = $request->ticketDate;
     $data['user_category'] = $request->userCategory;
@@ -107,10 +106,10 @@ class CartController extends Controller
     }
   }
 
-  public function showCheckoutForm($userId)
+  public function showCheckoutForm()
   {
-    $user = User::find($userId);
-    $data = $this->getUnpaidCartItems($userId); // find unpaid cart items
+    $user = Auth::user();
+    $data = $this->getUnpaidCartItems(Auth::id()); // find unpaid cart items
     if ($data->isEmpty()) {
       return redirect()->back()->with('error', 'Your cart is empty. Add items before checkout.');
     }

@@ -17,3 +17,5 @@
 
     <input type="submit" value="Submit">
 </form>
+
+@endsection

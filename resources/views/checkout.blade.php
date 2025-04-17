@@ -1,5 +1,9 @@
-<h1>Checkout</h1>
+@extends('layouts.app')
 
+@section('title', 'HyperHeaven - Home')
+
+@section('content')
+<h1>Checkout</h1>
 <form action="{{ route('cartController.checkout') }}" method="POST">
     @csrf
     <h2>Address</h2>
@@ -31,6 +35,7 @@
     <div>
         @foreach($items as $item)
         <div>
+            <img src="{{ asset('storage/' . $item->item->image) }}" style="width: 300px" alt="{{ $item->name }}" style="height:200px; object-fit:cover;">
             <div>Themepark: {{ $item->item->name }}</div>
             <div>Ticket Date: {{ $item->ticket_date }}</div>
             <div>Category: {{ $item->user_category }}</div>
@@ -59,12 +64,11 @@
     <!-- show payment method, lead to new page to choose: online banking, credit / debit card, cash -->
 
     <h2>Payment Method</h2>
-    <input type="radio" name="paymentMethod" value="onlineBanking"> Online Banking
-    <input type="radio" name="paymentMethod" value="credit/debitCard"> Credit/Debit Card
-    <input type="radio" name="paymentMethod" value="cashPaymentAtPhysicalStores"> Cash Payment at Physical Stores
-    <br><span style="color: red">@error('paymentMethod') {{ $message }} @endError</span><br>
+    <input type="radio" name="paymentMethod" value="onlineBanking"> Online Banking<br>
+    <input type="radio" name="paymentMethod" value="credit/debitCard"> Credit/Debit Card<br>
+    <input type="radio" name="paymentMethod" value="cashPaymentAtPhysicalStores"> Cash Payment at Physical Stores<br>
+    <span style="color: red">@error('paymentMethod') {{ $message }} @endError</span><br>
     <hr>
-
 
     <!-- show payment details: merchandise subtotal, shipping subtotal, shipping fee sst, total payment -->
     <h2>Payment Details</h2>
@@ -81,10 +85,11 @@
     @endphp
     @endforeach
 
-    <p>Merchandise Subtotal: RM{{ number_format($total, 2) }}</p>
-    <p>Tax (6%): RM{{ number_format($total * 0.06, 2) }}</p>
-    <p>Total Price: RM{{ number_format(($total * 1.06), 2) }}</p>
+    <div>Merchandise Subtotal: RM{{ number_format($total, 2) }}</div>
+    <div>Tax (6%): RM{{ number_format($total * 0.06, 2) }}</div>
+    <div>Total Price: RM{{ number_format(($total * 1.06), 2) }}</div><br>
 
     <!-- place holder button, lead to payment page -->
     <input type="submit" value="Place Order">
 </form>
+@endsection

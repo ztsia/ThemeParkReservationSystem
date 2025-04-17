@@ -1,3 +1,8 @@
+@extends('layouts.app')
+
+@section('title', 'HyperHeaven - Online Banking')
+
+@section('content')
 <div class="container">
     <h2>Online Banking Payment</h2>
 
@@ -28,3 +33,5 @@
         <input type="submit" value="Pay Now">
     </form>
 </div>
+
+@endsection
