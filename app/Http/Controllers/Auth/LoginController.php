@@ -63,7 +63,7 @@ class LoginController extends Controller
         $credentials['is_admin'] = 0; // user only
 
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('/dashboard'); 
+            return redirect()->route('home')->with('status', 'Login successful!');
         }
 
         return back()->withErrors(['email' => 'Invalid credentials or not a user.']);
@@ -81,7 +81,7 @@ class LoginController extends Controller
         $credentials['is_admin'] = 1; // admin only
 
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('/admin/dashboard'); // your admin dashboard
+            return redirect()->route('home')->with('status', 'Admin login successful!');
         }
 
         return back()->withErrors(['email' => 'Invalid credentials or not an admin.']);

@@ -3,6 +3,14 @@
 @section('title', 'HyperHeaven - Home')
 
 @section('content')
+
+@if (session('status'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('status') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
 <h2>Upcoming Events</h2>
 <div class="row">
     @foreach($events as $event)

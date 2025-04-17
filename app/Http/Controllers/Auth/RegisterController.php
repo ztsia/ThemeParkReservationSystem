@@ -65,7 +65,7 @@ class RegisterController extends Controller
         'is_admin' => $request->input('is_admin') == 1 ? 1 : 0,
     ]);
 
-    return redirect()->route('login')->with('success', 'User registered successfully.');
+    return redirect()->route('login')->with('status', 'User registered successfully.');
 }
 
     /**
@@ -86,6 +86,6 @@ class RegisterController extends Controller
             'is_admin' => 1, // <-- sets this user as admin
         ]);
 
-        return redirect()->route('login')->with('success', 'Admin registered successfully.');
+        return redirect()->route('login')->with('status', 'Admin registered successfully.');
     }
 }
