@@ -101,6 +101,9 @@ Route::post("/onlineBanking", [PaymentController::class, "onlineBanking"])->name
 Route::get("/creditCard", [PaymentController::class, "showCreditCardForm"])->name("paymentController.showCreditCardForm");
 Route::post("/creditCard", [PaymentController::class, "creditCard"])->name("paymentController.creditCard");
 Route::get("/cash", [PaymentController::class, "cash"])->name("paymentController.cash");
+
+// Order History
+Route::get("/orderHistory", [CartController::class, "showOrderHistory"])->name("cartController.showOrderHistory");
 });
 
 

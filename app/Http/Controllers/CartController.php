@@ -112,6 +112,17 @@ class CartController extends Controller
     return view("cart.checkout", ["items" => $data, "user" => $user]);
   }
 
+  public function showOrderHistory() {
+    $userId = Auth::id(); // Get the logged-in user's ID
+    $orderHistory = Cart::where('user_id', $userId)
+      ->whereNotNull('payment_date') // Only get paid items
+      ->with('item') // Eager load item details
+      ->orderBy('payment_date', 'desc') // Sort by payment date (most recent first)
+      ->get();
+    
+    return view("cart.history", ["items" => $orderHistory]);
+  }
+
   // get unpaid cart items with item details (only current and future dates)
   public static function getUnpaidCartItems($userId)
   {

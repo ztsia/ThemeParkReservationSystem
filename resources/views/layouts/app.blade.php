@@ -105,6 +105,10 @@
                                     <a class="dropdown-item" href="#">
                                         Edit Profile
                                     </a>
+                                    <!-- View Orders History Link -->
+                                    <a class="dropdown-item" href="{{ route('cartController.showOrderHistory') }}">
+                                        View Orders History
+                                    </a>
                                     <!--For Logout-->
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                                      document.getElementById('logout-form').submit();">
