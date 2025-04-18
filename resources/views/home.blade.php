@@ -43,6 +43,21 @@
             </div>
         </div>
         @endforeach
+
+        @can('isAdmin')
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-body d-flex flex-column align-items-center justify-content-center" style="height:200px; background-color: #f8f9fa;">
+                    <div class="mb-3 text-primary">
+                        <i class="fas fa-plus-circle" style="font-size: 3rem;"></i>
+                    </div>
+                    <h5 class="card-title text-primary">Add New Event</h5>
+                    <a href="{{ route('event.createForm') }}" class="btn btn-primary stretched-link">Create Event</a>
+                </div>
+            </div>
+        </div>
+        @endcan
+        
     </div>
     <h2 class="mt-5">Explore Our Attractions</h2>
     <div class="row">
@@ -73,6 +88,20 @@
             </div>
         </div>
         @endforeach
+
+        @can('isAdmin')
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-body d-flex flex-column align-items-center justify-content-center" style="height:200px; background-color: #f8f9fa;">
+                    <div class="mb-3 text-primary">
+                        <i class="fas fa-plus-circle" style="font-size: 3rem;"></i>
+                    </div>
+                    <h5 class="card-title text-primary">Add New Attraction</h5>
+                    <a href="{{ route('item.createForm') }}" class="btn btn-primary stretched-link">Create Attraction</a>
+                </div>
+            </div>
+        </div>
+        @endcan
     </div>
 </div>
 @endsection
