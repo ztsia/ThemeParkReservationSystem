@@ -84,12 +84,14 @@
             @endcan
 
             @can('isAdmin')
+            <!-- Admin Statistics Dashboard -->
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">Admin Statistics</h5>
+                    <h5 class="mb-0">Booking Statistics Dashboard</h5>
                 </div>
                 <div class="card-body">
-                    <div class="row">
+                    <h6 class="border-bottom pb-2 mb-3">Future Bookings</h6>
+                    <div class="row mb-4">
                         <div class="col-md-6">
                             <div class="stats-box text-center p-3 border rounded">
                                 <h6>Paid Orders</h6>
@@ -100,6 +102,38 @@
                             <div class="stats-box text-center p-3 border rounded">
                                 <h6>Pending Orders</h6>
                                 <p class="fs-4 fw-bold text-warning mb-0">{{ $unpaidCart }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h6 class="border-bottom pb-2 mb-3">Today's Bookings</h6>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="stats-box text-center p-3 border rounded">
+                                <h6>Paid Orders</h6>
+                                <p class="fs-4 fw-bold text-success mb-0">{{ $todayPaidCart }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="stats-box text-center p-3 border rounded">
+                                <h6>Pending Orders</h6>
+                                <p class="fs-4 fw-bold text-warning mb-0">{{ $todayUnpaidCart }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h6 class="border-bottom pb-2 mb-3">This Week's Bookings</h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="stats-box text-center p-3 border rounded">
+                                <h6>Paid Orders</h6>
+                                <p class="fs-4 fw-bold text-success mb-0">{{ $weeklyPaidCart }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="stats-box text-center p-3 border rounded">
+                                <h6>Pending Orders</h6>
+                                <p class="fs-4 fw-bold text-warning mb-0">{{ $weeklyUnpaidCart }}</p>
                             </div>
                         </div>
                     </div>

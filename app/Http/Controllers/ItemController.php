@@ -17,12 +17,54 @@ class ItemController extends Controller
             return redirect()->route('home')->with('status', 'Item not found.');
         }
         
-        // Calculate cart statistics
-        $paidCart = Cart::where('item_id', $id)->whereNotNull('payment_date')->count();
-        $unpaidCart = Cart::where('item_id', $id)->whereNull('payment_date')->count();
+        // Get date ranges
+        $today = now()->startOfDay();
+        $endOfDay = now()->endOfDay();
+        $endOfWeek = now()->addDays(6)->endOfDay(); // 7 days including today
+        
+        // Today's statistics
+        $todayPaidCart = Cart::where('item_id', $id)
+                            ->whereNotNull('payment_date')
+                            ->whereBetween('ticket_date', [$today, $endOfDay])
+                            ->count();
+                            
+        $todayUnpaidCart = Cart::where('item_id', $id)
+                              ->whereNull('payment_date')
+                              ->whereBetween('ticket_date', [$today, $endOfDay])
+                              ->count();
+        
+        // This week's statistics (including today)
+        $weeklyPaidCart = Cart::where('item_id', $id)
+                            ->whereNotNull('payment_date')
+                            ->whereBetween('ticket_date', [$today, $endOfWeek])
+                            ->count();
+                            
+        $weeklyUnpaidCart = Cart::where('item_id', $id)
+                              ->whereNull('payment_date')
+                              ->whereBetween('ticket_date', [$today, $endOfWeek])
+                              ->count();
+        
+        // Overall future statistics (keep these for backward compatibility)
+        $paidCart = Cart::where('item_id', $id)
+                        ->whereNotNull('payment_date')
+                        ->where('ticket_date', '>=', $today)
+                        ->count();
+                        
+        $unpaidCart = Cart::where('item_id', $id)
+                          ->whereNull('payment_date')
+                          ->where('ticket_date', '>=', $today)
+                          ->count();
         
         // Pass all variables to the view
-        return view('itemDetails', compact('item', 'paidCart', 'unpaidCart'));
+        return view('itemDetails', compact(
+            'item', 
+            'paidCart', 
+            'unpaidCart',
+            'todayPaidCart',
+            'todayUnpaidCart',
+            'weeklyPaidCart',
+            'weeklyUnpaidCart'
+        ));
     }
     
     /**
