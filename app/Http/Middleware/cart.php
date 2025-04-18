@@ -26,6 +26,12 @@ class cart
         if (Auth::user()->is_admin) {
             return redirect('/')->with('status', 'Admins cannot access user carts.');
         }
+
+        // Check if user is trying to access another user's cart
+        if ($request->route('userId') && $request->route('userId') != Auth::id()) {
+            return redirect()->route('cartController.showCartList', ['userId' => Auth::id()])
+                            ->with('status', 'You cannot access another user\'s cart.');
+        }
         
         // User is logged in and not an admin, allow access
         return $next($request);

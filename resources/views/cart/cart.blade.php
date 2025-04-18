@@ -3,6 +3,14 @@
 @section('title', 'HyperHeaven - Cart')
 
 @section('content')
+
+@if (session('status'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ session('status') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
 <div class="container py-4">
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-primary text-white">
