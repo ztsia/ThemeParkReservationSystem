@@ -112,13 +112,18 @@ class CartController extends Controller
     return view("cart.checkout", ["items" => $data, "user" => $user]);
   }
 
-  // get unpaid cart items with item details
+  // get unpaid cart items with item details (only current and future dates)
   public static function getUnpaidCartItems($userId)
   {
+    $today = now()->startOfDay(); // Get today's date at midnight
+    
     $unpaidCartItems = Cart::where('user_id', $userId)
       ->whereNull('payment_date')
+      ->whereDate('ticket_date', '>=', $today) // Only get today and future dates
       ->with('item')
+      ->orderBy('ticket_date', 'asc') // Sort by date (soonest first)
       ->get();
+      
     return $unpaidCartItems;
   }
 }
