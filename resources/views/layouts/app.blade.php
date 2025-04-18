@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="{{ $currentTheme }}">
 
 <head>
     <meta charset="utf-8">
@@ -25,7 +25,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md {{ $currentTheme == 'dark' ? 'navbar-dark bg-dark' : 'navbar-light bg-white' }} shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
 
@@ -66,6 +66,21 @@
                             </li>
                             @endcan
                             @endcannot
+
+                            <li class="nav-item dropdown me-3">
+                                <a class="nav-link dropdown-toggle" href="#" id="themeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-paint-brush"></i> Theme
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="themeDropdown">
+                                    <li><a class="dropdown-item" href="{{ route('switchTheme', ['theme' => 'light']) }}">
+                                            <i class="fas fa-sun me-2"></i> Light
+                                        </a></li>
+                                    <li><a class="dropdown-item" href="{{ route('switchTheme', ['theme' => 'dark']) }}">
+                                            <i class="fas fa-moon me-2"></i> Dark
+                                        </a></li>
+                                </ul>
+                            </li>
+                            
                             <!-- Authentication Links -->
                             @guest
                             @if (Route::has('login'))

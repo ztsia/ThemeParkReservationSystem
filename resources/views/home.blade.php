@@ -48,11 +48,11 @@
         <div class="col-md-4">
             <div class="card mb-3">
                 <a href="{{ route('event.createForm') }}" class="stretched-link text-decoration-none">
-                    <div class="card-body d-flex flex-column align-items-center justify-content-center" style="height:200px; background-color: #f8f9fa;">
-                        <div class="mb-3 text-primary">
-                            <i class="fas fa-plus-circle" style="font-size: 3rem;"></i>
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center" style="height:200px;">
+                        <div class="mb-3">
+                            <i class="fas fa-plus-circle text-primary" style="font-size: 3rem;"></i>
                         </div>
-                        <h5 class="card-title text-primary">Add New Event</h5>
+                        <h5 class="card-title">Add New Event</h5>
                     </div>
                 </a>
             </div>
@@ -94,11 +94,11 @@
         <div class="col-md-4">
             <div class="card mb-3">
                 <a href="{{ route('item.createForm') }}" class="stretched-link text-decoration-none">
-                    <div class="card-body d-flex flex-column align-items-center justify-content-center" style="height:200px; background-color: #f8f9fa;">
-                        <div class="mb-3 text-primary">
-                            <i class="fas fa-plus-circle" style="font-size: 3rem;"></i>
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center" style="height:200px;">
+                        <div class="mb-3">
+                            <i class="fas fa-plus-circle text-primary" style="font-size: 3rem;"></i>
                         </div>
-                        <h5 class="card-title text-primary">Add New Attraction</h5>
+                        <h5 class="card-title">Add New Attraction</h5>
                     </div>
                 </a>
             </div>

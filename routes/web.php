@@ -55,7 +55,7 @@ Route::get('logout', [LoginController::class, 'logout']);
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/items/{item}', [ItemController::class, 'show'])->name('showItems');
-
+Route::get('/theme/{theme}', [HomeController::class, 'switchTheme'])->name('switchTheme');
 
 
 
