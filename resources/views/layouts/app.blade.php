@@ -102,8 +102,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <!-- Edit Profile Link -->
-                                    <a class="dropdown-item" href="#">
-                                        Edit Profile
+                                    <a class="dropdown-item" href="{{ route('profile.edit') }}">Edit Profile</a>
+                                
                                     </a>
                                     <!-- View Orders History Link -->
                                     <a class="dropdown-item" href="{{ route('cartController.showOrderHistory') }}">
