@@ -28,7 +28,6 @@ class PaymentController extends Controller
             'bank' => 'required | string',
             'accountNumber' => 'required | digits:12',
             'password' => 'required | string',
-            'amount' => 'required | numeric | min:1 | max:5000',
         ]);
 
         $unpaidCartItems = CartController::getUnpaidCartItems($request->userId);
@@ -40,12 +39,13 @@ class PaymentController extends Controller
             $item->save();
         }
 
-        return redirect()->route('home')->with('success', 'Payment successful!');
+        return redirect()->route('home')->with('status', 'Payment successful with online banking!');
     }
 
     public function showOnlineBankingForm()
     {
-        return view('cart.onlineBanking');
+        $data = CartController::getUnpaidCartItems(Auth::id()); // find unpaid cart items
+        return view('cart.onlineBanking', ["items" => $data]);
     }
 
     public function creditCard(Request $request)
@@ -54,7 +54,7 @@ class PaymentController extends Controller
             'cardholderName' => 'required | max:255 | regex:/^[A-Z][a-zA-Z\s]*$/',
             'cardNumber' => 'required | digits:16',
             'expiryDate' => 'required',
-            'cvv' => 'required | digits:3',
+            'cvv' => 'required | digits_between:3,4',
         ]);
 
 
@@ -67,7 +67,7 @@ class PaymentController extends Controller
             $item->save();
         }
 
-        return redirect()->route('home')->with('success', 'Payment successful!');
+        return redirect()->route('home')->with('status', 'Payment successful with debit/credit card!');
     }
 
     public function showCreditCardForm()

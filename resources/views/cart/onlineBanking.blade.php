@@ -15,7 +15,7 @@
                         @csrf
                         <input type="hidden" name="userId" value="{{ auth()->user()->id }}">
                         <input type="hidden" name="paymentType" value="Online Banking">
-                        
+
                         <div class="mb-3">
                             <label for="bank" class="form-label fw-bold">Select Bank</label>
                             <select name="bank" id="bank" class="form-select @error('bank') is-invalid @enderror">
@@ -27,49 +27,54 @@
                                 <option value="Bank Islam" {{ old('bank') == 'Bank Islam' ? 'selected' : '' }}>Bank Islam</option>
                             </select>
                             @error('bank')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="accountNumber" class="form-label fw-bold">Account Number</label>
-                            <input type="text" class="form-control @error('accountNumber') is-invalid @enderror" 
-                                   id="accountNumber" name="accountNumber" value="{{ old('accountNumber') }}">
+                            <input type="text" class="form-control @error('accountNumber') is-invalid @enderror"
+                                id="accountNumber" name="accountNumber" value="{{ old('accountNumber') }}">
                             @error('accountNumber')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="password" class="form-label fw-bold">Password</label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" 
-                                   id="password" name="password">
+                            <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                id="password" name="password">
                             @error('password')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        
+
+                        @php
+                        $total = 0; // Initialize total
+                        @endphp
+
+                        @foreach ($items as $item)
+                        @php
+                        // Retrieve the item's price based on user category
+                        $itemPrice = $item->item->getPriceByCategory($item->user_category);
+                        $subtotal = $itemPrice * $item->quantity;
+                        $total += $subtotal;
+                        @endphp
+                        @endforeach
                         <div class="mb-4">
                             <label for="amount" class="form-label fw-bold">Amount (RM)</label>
-                            <div class="input-group">
-                                <span class="input-group-text">RM</span>
-                                <input type="number" step="0.01" class="form-control @error('amount') is-invalid @enderror" 
-                                       id="amount" name="amount" value="{{ old('amount') }}">
-                                @error('amount')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <p class="form-control-plaintext">RM{{ number_format(($total * 1.06), 2) }}</p>
                         </div>
-                        
+
                         <div class="d-flex justify-content-between mt-4">
-                            <a href="{{ route('cartController.showCheckoutForm', ['userId' => auth()->id()]) }}" 
-                               class="btn btn-outline-secondary">Back to Checkout</a>
+                            <a href="{{ route('cartController.showCheckoutForm', ['userId' => auth()->id()]) }}"
+                                class="btn btn-outline-secondary">Back to Checkout</a>
                             <button type="submit" class="btn btn-primary">Complete Payment</button>
                         </div>
                     </form>
                 </div>
             </div>
-            
+
             <div class="text-center mt-3">
                 <p class="text-muted small">Using online banking is a secure way to pay for your tickets</p>
                 <p class="text-muted small">Your banking credentials are encrypted and never stored on our servers.</p>
