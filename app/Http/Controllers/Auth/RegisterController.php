@@ -44,29 +44,29 @@ class RegisterController extends Controller
      */
     public function showUserRegisterForm()
     {
-        return view('auth.register', ['isAdmin' => false]); 
+        return view('auth.register', ['isAdmin' => false]);
     }
 
     /**
      * Create a regular user (used by default Laravel registration)
      */
     public function registerUser(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users',
-        'password' => 'required|string|min:8|confirmed',
-    ]);
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
 
-    User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-        'is_admin' => $request->input('is_admin') == 1 ? 1 : 0,
-    ]);
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'is_admin' => $request->input('is_admin') == 1 ? 1 : 0,
+        ]);
 
-    return redirect()->route('login')->with('status', 'User registered successfully.');
-}
+        return redirect()->route('login')->with('status', 'User registered successfully.');
+    }
 
     /**
      * Custom method for registering admins
