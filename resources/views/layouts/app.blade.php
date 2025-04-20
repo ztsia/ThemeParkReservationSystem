@@ -80,7 +80,7 @@
                                         </a></li>
                                 </ul>
                             </li>
-                            
+
                             <!-- Authentication Links -->
                             @guest
                             @if (Route::has('login'))
@@ -103,32 +103,35 @@
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <!-- Edit Profile Link -->
                                     <a class="dropdown-item" href="{{ route('profile.edit') }}">Edit Profile</a>
-                                
-                                    </a>
-                                    <!-- View Orders History Link -->
-                                    <a class="dropdown-item" href="{{ route('cartController.showOrderHistory') }}">
-                                        View Orders History
-                                    </a>
-                                    <!--For Logout-->
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                </a>
+
+                @can('isUser')
+                <!-- View Orders History Link -->
+                <a class="dropdown-item" href="{{ route('cartController.showOrderHistory') }}">
+                    View Orders History
+                </a>
+                @endcan
+
+                <!--For Logout-->
+                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                    {{ __('Logout') }}
+                </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                            @endguest
-                        </ul>
-                    </div>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
-        </nav>
+            </li>
+            @endguest
+            </ul>
+    </div>
+    </div>
+    </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+    <main class="py-4">
+        @yield('content')
+    </main>
 
     </div>
 </body>
