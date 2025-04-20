@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,6 +108,6 @@ Route::get("/orderHistory", [CartController::class, "showOrderHistory"])->name("
 
 //Edit user profile
 Route::middleware('auth')->group(function () {
-    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/profile/edit', [UserController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile/update', [UserController::class, 'update'])->name('profile.update');
 });

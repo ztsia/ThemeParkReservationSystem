@@ -12,6 +12,7 @@
     <form method="POST" action="{{ route('profile.update') }}">
         @csrf
 
+        @method('PATCH')
         <div class="form-group mb-3">
             <label>Name</label>
             <input type="text" name="name" value="{{ $user->name }}" class="form-control" required>
