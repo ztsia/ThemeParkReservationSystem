@@ -44,7 +44,7 @@ class ItemController extends Controller
                               ->whereBetween('ticket_date', [$today, $endOfWeek])
                               ->count();
         
-        // Overall future statistics (keep these for backward compatibility)
+        // Overall future statistics
         $paidCart = Cart::where('item_id', $id)
                         ->whereNotNull('payment_date')
                         ->where('ticket_date', '>=', $today)
