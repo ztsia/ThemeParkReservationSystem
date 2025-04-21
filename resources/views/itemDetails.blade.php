@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'HyperHeaven - Item')
+@section('title', "HyperHeaven - {$item->name}")
 
 @section('content')
 <div class="container py-4">

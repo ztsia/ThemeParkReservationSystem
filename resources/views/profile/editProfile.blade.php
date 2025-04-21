@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'HyperHeaven - Order History')
+@section('title', 'HyperHeaven - Edit Profile')
 
 @section('content')
 <div class="container">
