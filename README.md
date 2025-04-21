@@ -50,7 +50,9 @@ Copy the .env.example file to .env
 Or edit the .env file directly if already available
 
 DB_DATABASE=your_database
+
 DB_USERNAME=your_username
+
 DB_PASSWORD=your_password
 
 ### 4. Create database
